@@ -16,11 +16,15 @@
  */
 public class UndirectedEdge {
 
+	// future projects may rely on a unique identifier for an edge
+	public final int id;
+	public final double weight;
+	
 	// private data members
 	private City a, b;
 	
-	// future projects may rely on a unique identifier for an edge
-	private final int id;
+
+	
 	
 	/**
 	 * Construct an undirected edge
@@ -40,6 +44,9 @@ public class UndirectedEdge {
 		} else {
 			throw new IllegalArgumentException("Cannot have self loop");
 		}
+		// distance = sqrt((lat1-lat2)*(lat1-lat2)+(lon1-lon2)*(lon1-lon2))*100 
+		weight = 
+		Math.sqrt((a.lat-b.lat)*(a.lat-b.lat)+(a.lon-b.lon)*(a.lon-b.lon))*100;
 		this.a.addEdge(this);
 		this.b.addEdge(this);
 	}

@@ -25,6 +25,7 @@ public class Search {
 		PrintStream out = os(args[OUT_INDEX]);
 		Scanner scan = new Scanner(in);
 		String startCity, endCity;
+		City start, goal;
 		startCity = scan.nextLine();
 		endCity = scan.nextLine();
 		scan.close();
@@ -36,9 +37,28 @@ public class Search {
 		if(!america.verifyCity(endCity)) {
 			error("No such city: " + endCity);
 		}
+		start = america.getCity(startCity);
+		goal = america.getCity(endCity);
 		
-		out.println(startCity);
-		out.println(endCity);
+		
+		SearchResult[] results = { 
+			america.bfs(start, goal),
+			america.dfs(start, goal), 
+			america.aStar(start, goal)
+		};
+		
+		for(SearchResult result : results) {
+			out.println();
+			out.println(result.title);
+			out.println("That took " + result.hops() +
+					" hops to find.");
+			out.println("Total distance = " + result.totalDistance() +
+					" miles.");
+			
+			out.println();
+		}
+		
+		
 		out.close();
 	}
 	
