@@ -40,6 +40,28 @@ public class Merica {
 		return retval;
 	}
 	
+	public City getCity(String city) {
+		City retval = null;
+		for(int i = 0; i < cities.size() && retval == null; i++) {
+			if(cities.get(i).name.equals(city)) {
+				retval = cities.get(i);
+			}
+		}
+		return retval;
+	}
+	
+	public SearchResult bfs(City start, City goal) {
+		return new SearchResult("Breadth-First Search Results: ");
+	}
+	
+	public SearchResult dfs(City start, City goal) {
+		return new SearchResult("Depth-First Search Results: ");
+	}
+	
+	public SearchResult aStar(City start, City goal) {
+		return new SearchResult("A* Search Results: ");
+	}
+	
 	/**
 	 * Perform a BFS to get the distance from one vertex to another
 	 * 
