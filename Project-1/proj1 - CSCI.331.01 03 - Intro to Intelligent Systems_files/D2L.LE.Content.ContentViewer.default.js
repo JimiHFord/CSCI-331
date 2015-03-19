@@ -1,0 +1,2 @@
+D2L.LE.ViewContent={};
+D2L.LE.ViewContent.ContentViewer={OnLoad:function(orgUnitId,topicId){var callback=function(){var result=D2L.LP.Web.UI.Rpc.ConnectObjectSynchronous(D2L.LP.Web.UI.Rpc.Verbs.POST,new D2L.LP.Web.Http.UrlLocation("/d2l/le/content/"+orgUnitId+"/viewContent/"+topicId+"/FinalizeView"))};D2L.LP.Web.UI.Html.Dom.AddEventListener("unload",window,callback)}};if(window["D2L"]!==undefined&&D2L.LP.Web.Packaging!==undefined)D2L.LP.Web.Packaging.Register("D2L.LE.Content.ContentViewer.default");

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)https://mycourses.rit.edu/d2l/le/content/540720/viewContent/3316600/View -->
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>proj1 - CSCI.331.01/03 - Intro to Intelligent Systems</title>
+		<link rel="stylesheet" type="text/css" href="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/valenceui.min.css">
+		<link rel="stylesheet" type="text/css" href="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/D2L.LP.Web.Desktop.default.css">
+		<link rel="stylesheet" type="text/css" href="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/D2L.LE.ToolIntegration.Content.default.css">
+		<style type="text/css">
+		/*<![CDATA[*/
+			.d2l-font{ font-family:'PT Sans', sans-serif; font-size:13px; }.d2l-font-inverse{ font-size:11px;line-height:1.77em; }
+		/*]]>*/
+		</style>
+		<link rel="stylesheet" type="text/css" href="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/5219">
+		<link rel="stylesheet" type="text/css" href="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/ptsansregular">
+		<link rel="stylesheet" type="text/css" href="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/D2L.LP.Web.Desktop.Print.default.css" media="print">
+		<style type="text/css">
+		/*<![CDATA[*/
+			.d2l_1_13_739 {background-color:#000006;}
+			.d2l_1_14_634 {table-layout: Inherit;}
+			.d2l_1_15_313 {vertical-align:middle;}
+			.d2l_1_16_488 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:-9px -1413px;background-repeat:no-repeat;width:9px;height:18px;}
+			.d2l_1_18_76 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:-10px -1431px;background-repeat:no-repeat;width:10px;height:10px;}
+			.d2l_1_19_951 {max-width:375px;}
+			.d2l_1_20_902 {min-width:375px;}
+			.d2l_1_22_476 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -310px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_23_789 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -110px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_24_142 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -210px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_25_713 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -190px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_26_121 {max-width:350px;}
+			.d2l_1_27_586 {min-width:350px;}
+			.d2l_1_29_580 {padding:0px 10px;}
+			.d2l_1_30_241 {margin:5px;}
+			.d2l_1_31_537 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -1333px;background-repeat:no-repeat;width:16px;height:16px;}
+			.d2l_1_32_8 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -853px;background-repeat:no-repeat;width:16px;height:16px;}
+			.d2l_1_33_353 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -230px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_34_541 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -270px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_35_855 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -250px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_36_285 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -170px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_38_136 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -130px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_39_231 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -70px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_40_763 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -90px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_41_254 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -150px;background-repeat:no-repeat;width:20px;height:20px;}
+			.d2l_1_43_731 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -48px;background-repeat:no-repeat;width:22px;height:22px;}
+			.d2l_1_44_315 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -1445px;background-repeat:no-repeat;width:10px;height:10px;}
+			.d2l_1_46_890 {margin:10px;}
+			.d2l_1_47_482 {vertical-align:top;}
+			.d2l_1_48_616 {width:1%;}
+			.d2l_1_49_135 {background-position:left top;}
+			.d2l_1_50_162 {padding:1em;}
+			.d2l_1_51_477 {background-image:url('/d2l/img/0/Auth.SessionExpiry.actAlert.png?v=10.3.0.791-109');}
+			.d2l_1_52_204 {background-position:right top;}
+			.d2l_1_53_223 {padding-right:75px;}
+			.d2l_1_54_781 {min-height:115px;}
+			.d2l_1_55_780 {background-image:url('/d2l/img/0/Auth.SessionExpiry.actCheck.png?v=10.3.0.791-109');}
+			.d2l_1_56_24 {padding:3.6em;}
+			.d2l_1_57_503 {vertical-align:baseline;}
+			.d2l_1_58_90 {width:100%;}
+			.d2l_1_60_398 {margin-top:0.5em;margin-bottom:10px;}
+			.d2l_1_61_976 {table-layout: Fixed;}
+			.d2l_1_62_915 {width:34px;}
+			.d2l_1_63_530 {margin-right:10px;}
+			.d2l_1_64_558 {background-image:url('/d2l/img/0/sprites/D2L.LP.FileTypes.png?v=10.3.0.791-109');background-position:0 -942px;background-repeat:no-repeat;width:24px;height:24px;}
+			.d2l_1_67_356 {background-image:url('/d2l/img/0/Binder.Main.icoSend.png?v=10.3.0.791-109');}
+			.d2l_1_69_778 {background-image:url('/d2l/img/0/Content.main.actLeaveFeedback.gif?v=10.3.0.791-109');}
+			.d2l_1_71_657 {background-image:url('/d2l/img/0/Content.Main.actDownload.gif?v=10.3.0.791-109');}
+			.d2l_1_73_844 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:-10px -1441px;background-repeat:no-repeat;width:10px;height:7px;}
+			.d2l_1_74_188 {margin:4px 0px 0px 5px;}
+			.d2l_1_77_743 {background-image:url('/d2l/img/0/Content.Main.actBookmarkTopic24.png?v=10.3.0.791-109');background-position:0 0;background-repeat:no-repeat;width:36px;height:28px;}
+			.d2l_1_78_474:hover,.d2l_1_78_474:focus,.d2l_1_78_474:active {background-image:url('/d2l/img/0/Content.Main.actBookmarkTopicHover24.png?v=10.3.0.791-109');background-position:0 0;background-repeat:no-repeat;width:36px;height:28px;}
+			.d2l_1_79_287 {background-image:url('/d2l/img/0/Content.Main.actRemoveBookmark24.png?v=10.3.0.791-109');background-position:0 0;background-repeat:no-repeat;width:36px;height:28px;}
+			.d2l_1_80_821:hover,.d2l_1_80_821:focus,.d2l_1_80_821:active {background-image:url('/d2l/img/0/Content.Main.actRemoveBookmarkHover24.png?v=10.3.0.791-109');background-position:0 0;background-repeat:no-repeat;width:36px;height:28px;}
+			.d2l_1_82_969 {background-image:url('/d2l/img/0/Content.Main.actFullScreen.png?v=10.3.0.791-109');background-position:0 0;background-repeat:no-repeat;width:36px;height:28px;}
+			.d2l_1_83_27:hover,.d2l_1_83_27:focus,.d2l_1_83_27:active {background-image:url('/d2l/img/0/Content.Main.actFullScreenHover.png?v=10.3.0.791-109');background-position:0 0;background-repeat:no-repeat;width:36px;height:28px;}
+			.d2l_1_84_417 {margin-left:10px;}
+			.d2l_1_85_762 {background-image:url('/d2l/img/0/Framework.Iterator.actPrevMvc.png?v=10.3.0.791-109');background-position:0 0;background-repeat:no-repeat;width:16px;height:16px;}
+			.d2l_1_86_332 {background-image:url('/d2l/img/0/Framework.Iterator.actNextMvc.png?v=10.3.0.791-109');background-position:0 0;background-repeat:no-repeat;width:16px;height:16px;}
+			.d2l_1_87_783 {margin-bottom:10px;}
+			.d2l_1_89_759 {height:580px;}
+			.d2l_1_90_831 {padding:20px 0px 0px 0px;}
+			.d2l_1_91_780 {background-image:url('/d2l/img/0/Binder.Main.icoSend.png?v=10.3.0.791-109');background-position:0 0;background-repeat:no-repeat;width:16px;height:16px;}
+			.d2l_1_92_740 {background-image:url('/d2l/img/0/Content.Main.actDownload.gif?v=10.3.0.791-109');background-position:0 0;background-repeat:no-repeat;width:16px;height:16px;}
+			.d2l_1_93_8 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -629px;background-repeat:no-repeat;width:16px;height:16px;}
+			.d2l_1_94_831 {padding:20px 0px 10px 0px;}
+			.d2l_1_97_148 {background-color:#F8F8F8;}
+			.d2l_1_98_173 {border:1px solid #D4D4D4;}
+			.d2l_1_100_648 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -741px;background-repeat:no-repeat;width:16px;height:16px;}
+			.d2l_1_102_284 {background-image:url('/d2l/img/0/sprites/D2L.LP.Main.png?v=10.3.0.791-109');background-position:0 -805px;background-repeat:no-repeat;width:16px;height:16px;}
+			.d2l_1_103_837 {background-color:#FFFFFF;}
+			.d2l_1_104_106 {border-right:1px solid #D4D4D4;border-bottom:1px solid #D4D4D4;border-left:1px solid #D4D4D4;}
+			.d2l_1_105_504 {padding:10px 20px;}
+			.d2l_1_106_292 {padding:0px 0px 10px 0px;}
+			.d2l_1_107_359 {background-image:url('/d2l/img/0/Content.ContentStructureBrowser.infVisited.png?v=10.3.0.791-109');}
+			.d2l_1_108_35 {padding-left:25px;}
+			.d2l_1_109_133 {min-height:20px;}
+		/*]]>*/
+		</style>
+	<script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({ delayStartupUntil: "onload",showProcessingMessages: false, messageStyle: "none", showMathMenu: true, showMathMenuMSIE: true, menuSettings: { context: "MathJax", zoom: "None" },NativeMML: { showMathMenuMSIE: false, scale: 140 }, "HTML-CSS": { linebreaks: { automatic: true, width: "container"}, imageFont: null, scale: 130 } });</script><script type="text/javascript" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/MathJax.js"></script><style type="text/css"></style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuTitle {background-color: #CCCCCC; margin: -5px 0 0 0; text-align: center; font-style: italic; font-size: 80%; color: #444444; padding: 2px 0; overflow: hidden}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style id="wrc-middle-css" type="text/css">.wrc_whole_window{	display: none;	position: fixed; 	z-index: 2147483647;	background-color: rgba(40, 40, 40, 0.9);	word-spacing: normal;	margin: 0px;	padding: 0px;	border: 0px;	left: 0px;	top: 0px;	width: 100%;	height: 100%;	line-height: normal;	letter-spacing: normal;}.wrc_middle_main {	font-family: Segoe UI, Arial Unicode MS, Arial, Sans-Serif;	font-size: 14px;	width: 600px;	height: auto;	margin: 0px auto;	margin-top: 15%;    background: url(chrome-extension://icmlaeflemplmjndnaapfdbbnpncnbda/skin/images/background-body.jpg) repeat-x left top;	background-color: rgb(39, 53, 62);}.wrc_middle_logo {    background: url(chrome-extension://icmlaeflemplmjndnaapfdbbnpncnbda/skin/images/logo.jpg) no-repeat left bottom;    width: 140px;    height: 42px;    color: orange;    display: table-cell;    text-align: right;    vertical-align: middle;}.wrc_icon_warning {	margin: 20px 10px 20px 15px;	float: left;	background-color: transparent;}.wrc_middle_title {    color: #b6bec7;	height: auto;    margin: 0px auto;	font-size: 2.2em;	white-space: nowrap;	text-align: center;}.wrc_middle_hline {    height: 2px;	width: 100%;    display: block;}.wrc_middle_description {	text-align: center;	margin: 15px;	font-size: 1.4em;	padding: 20px;	height: auto;	color: white;	min-height: 3.5em;}.wrc_middle_actions_main_div {	margin-bottom: 15px;	text-align: center;}.wrc_middle_actions_blue_button {	-moz-appearance: none;	border-radius: 7px;	-moz-border-radius: 7px/7px;	border-radius: 7px/7px;	background-color: rgb(0, 173, 223) !important;	display: inline-block;	width: auto;	cursor: Pointer;	border: 2px solid #00dddd;}.wrc_middle_actions_blue_button:hover {	background-color: rgb(0, 159, 212) !important;}.wrc_middle_actions_blue_button:active {	background-color: rgb(0, 146, 200) !important;	border: 2px solid #00aaaa;}.wrc_middle_actions_blue_button div {	display: inline-block;	width: auto;	cursor: Pointer;	margin: 3px 10px 3px 10px;	color: white;	font-size: 1.2em;	font-weight: bold;}.wrc_middle_action_low {	font-size: 0.9em;	white-space: nowrap;	cursor: Pointer;	color: grey !important;	margin: 10px 10px 0px 10px;	text-decoration: none;}.wrc_middle_action_low:hover {	color: #aa4400 !important;}.wrc_middle_actions_rest_div {	padding-top: 5px;	white-space: nowrap;	text-align: center;}.wrc_middle_action {	white-space: nowrap;	cursor: Pointer;	color: red !important;	font-size: 1.2em;	margin: 10px 10px 0px 10px;	text-decoration: none;}.wrc_middle_action:hover {	color: #aa4400 !important;}</style><script id="wrc-script-middle_window" type="text/javascript" language="JavaScript">var g_inputsCnt = 0;var g_InputThis = new Array(null, null, null, null);var g_alerted = false;/* we test the input if it includes 4 digits   (input is a part of 4 inputs for filling the credit-card number)*/function is4DigitsCardNumber(val){	var regExp = new RegExp('[0-9]{4}');	return (val.length == 4 && val.search(regExp) == 0);}/* testing the whole credit-card number 19 digits devided by three '-' symbols or   exactly 16 digits without any dividers*/function isCreditCardNumber(val){	if(val.length == 19)	{		var regExp = new RegExp('[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}');		return (val.search(regExp) == 0);	}	else if(val.length == 16)	{		var regExp = new RegExp('[0-9]{4}[0-9]{4}[0-9]{4}[0-9]{4}');		return (val.search(regExp) == 0);	}	return false;}function CheckInputOnCreditNumber(self){	if(g_alerted)		return false;	var value = self.value;	if(self.type == 'text')	{		if(is4DigitsCardNumber(value))		{			var cont = true;			for(i = 0; i < g_inputsCnt; i++)				if(g_InputThis[i] == self)					cont = false;			if(cont && g_inputsCnt < 4)			{				g_InputThis[g_inputsCnt] = self;				g_inputsCnt++;			}		}		g_alerted = (g_inputsCnt == 4);		if(g_alerted)			g_inputsCnt = 0;		else			g_alerted = isCreditCardNumber(value);	}	return g_alerted;}function CheckInputOnPassword(self){	if(g_alerted)		return false;	var value = self.value;	if(self.type == 'password')	{		g_alerted = (value.length > 0);	}	return g_alerted;}function onInputBlur(self, bRatingOk, bFishingSite){	var bCreditNumber = CheckInputOnCreditNumber(self);	var bPassword = CheckInputOnPassword(self);	if((!bRatingOk || bFishingSite == 1) && (bCreditNumber || bPassword) )	{		var warnDiv = document.getElementById("wrcinputdiv");		if(warnDiv)		{			/* show the warning div in the middle of the screen */			warnDiv.style.left = "0px";			warnDiv.style.top = "0px";			warnDiv.style.width = "100%";			warnDiv.style.height = "100%";			document.getElementById("wrc_warn_fs").style.display = 'none';			document.getElementById("wrc_warn_cn").style.display = 'none';			if(bFishingSite)				document.getElementById("wrc_warn_fs").style.display = 'block';			else				document.getElementById("wrc_warn_cn").style.display = 'block';			warnDiv.style.display = 'block';		}	}}</script></head>
+	<body class="d2l-body d2l-font" gram_dict="true" cz-shortcut-listen="true"><div id="MathJax_Message" style="display: none;"></div>
+		<div class="d2l-background-global"><div></div>
+		</div>
+		<div class="d2l-background-left"><div><div></div>
+			</div>
+		</div>
+		<div class="d2l-background-right"><div><div></div>
+			</div>
+		</div>
+		<a href="https://mycourses.rit.edu/d2l/le/content/540720/viewContent/3316600/View#d2l_1_12_709" class="d2l-skipnav" id="d2l_skipnav">skip to main content</a>
+		<div class="d2l-minibar-placeholder d2l-minibar-placeholder-fixed" id="d2l_minibar_placeholder" style="height: 35px;">
+			<div class="d2l-minibar d2l-min-width d2l-minibar-light d2l_1_13_739" id="d2l_minibar">
+				<div class="d2l-max-width">
+					<div class="d2l-minibar-padding">
+						<div class="d2l-box-layout d2l_1_14_634">
+							<div class="d2l-box d2l-box-h d2l_1_15_313">
+								<a class="d2l-minibar-home vui-link d2l-link" href="https://mycourses.rit.edu/d2l/lp/ouHome/defaultHome.d2l"><img class="" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/5673689" alt=""><span class="d2l-minibar-home-text">My Home</span></a><span class="d2l-minibar-breadcrumb"><span class="d2l_1_16_488"></span><span class="d2l-menuflyout-spacer">&nbsp;</span></span><div class="d2l-menuflyout-link d2l-menuflyout-closed d2l-menuflyout-light d2l-left" id="d2l_1_17_321">
+									<div class="d2l-menuflyout-link-hover">
+										<a class="d2l-menuflyout-link-link" title="CSCI.331.01/03 - Intro to Intelligent Systems" href="https://mycourses.rit.edu/d2l/home/540720">CSCI.331.01/03 - Intro to Intelligent Systems</a><a class="d2l-menuflyout-opener d2l-clickable" title="Select a course..." onclick="return false;" tabindex="0" role="button" aria-controls="d2l_1_21_648" aria-labelledby="d2l_c_5_426"><div class="d2l-textblock d2l-offscreen" id="d2l_c_5_426">Select a course...</div>
+										<span class="d2l-menuflyout-link-arrow d2l_1_18_76"></span><span class="d2l-menuflyout-spacer">&nbsp;</span></a><div class="d2l-clear"></div>
+									</div>
+									<div class="d2l-menuflyout-contents d2l_1_19_951 d2l_1_20_902" id="d2l_1_21_648" aria-hidden="true" aria-expanded="false" tabindex="0" aria-live="assertive" aria-labelledby="d2l_c_5_426" style="max-height: 1224px;">
+										<div class="d2l-menuflyout-group-container">
+											<div id="courseSelectorId" class="d2l-placeholder d2l-placeholder-live" aria-live="assertive">
+												<div class="d2l-loading"><div class="d2l-textblock d2l-offscreen">Loading...</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="d2l-box d2l-box-h d2l-minibar-right d2l_1_15_313">
+								<div class="d2l-minibar-activity">
+									<div class="d2l-menuflyout d2l-menuflyout-closed d2l-menuflyout-light d2l-left" id="d2l_1_9_799">
+										<a class="d2l-menuflyout-opener d2l-clickable" title="Message alerts" onclick="return false;" tabindex="0" role="button" aria-controls="d2l_1_28_162" aria-labelledby="d2l_c_1_821">
+											<span class="d2l-menuflyout-text d2l-offscreen" id="d2l_c_1_821">Message alerts</span><div class="d2l-minibar-activity-buckethandle alert_bucket_Messages">
+												<img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="Alert d2l_1_22_476"><img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="NewAlert d2l-hidden d2l_1_23_789"><img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="OpenAlert d2l-hidden d2l_1_24_142"><img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="NewOpenAlert d2l-hidden d2l_1_25_713"><span class="d2l-menuflyout-spacer">&nbsp;</span></div>
+											<div class="d2l-clear"></div>
+										</a>
+										<div class="d2l-menuflyout-contents d2l-menuflyout-contents-left d2l_1_26_121 d2l_1_27_586" id="d2l_1_28_162" aria-hidden="true" aria-expanded="false" tabindex="0" aria-live="assertive" aria-labelledby="d2l_c_1_821" style="max-height: 1224px;">
+											<div class="d2l-menuflyout-group-container">
+												<div class="d2l_1_29_580">
+													<div>
+														<div>
+															<a class="d2l-text-imagelink vui-outline d2l-left d2l_1_30_241" onclick="D2L.O(&quot;__g1&quot;,0)();return false;" href="javascript:void(0);">
+																<img class="d2l-text-imagelink-img d2l_1_31_537" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt=""><span class="d2l-text-imagelink-text">Go to Pager</span>
+															</a>
+															<a class="d2l-text-imagelink vui-outline d2l-right d2l_1_30_241" href="https://mycourses.rit.edu/d2l/lms/email/frame.d2l?ou=540720">
+																<img class="d2l-text-imagelink-img d2l_1_32_8" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt=""><span class="d2l-text-imagelink-text">Go to Email</span>
+															</a>
+															<div class="d2l-clear"></div>
+														</div>
+														<div id="AB_DL_PH_Messages" class="d2l-placeholder d2l-placeholder-live" aria-live="assertive">
+															<div class="d2l-loading"><div class="d2l-textblock d2l-offscreen">Loading...</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="d2l-minibar-separator"></div><div class="d2l-menuflyout d2l-menuflyout-closed d2l-menuflyout-light d2l-left" id="d2l_1_10_382">
+										<a class="d2l-menuflyout-opener d2l-clickable" title="Update alerts" onclick="return false;" tabindex="0" role="button" aria-controls="d2l_1_37_830" aria-labelledby="d2l_c_2_120">
+											<span class="d2l-menuflyout-text d2l-offscreen" id="d2l_c_2_120">Update alerts</span><div class="d2l-minibar-activity-buckethandle alert_bucket_Grades">
+												<img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="Alert d2l_1_33_353"><img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="NewAlert d2l-hidden d2l_1_34_541"><img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="OpenAlert d2l-hidden d2l_1_35_855"><img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="NewOpenAlert d2l-hidden d2l_1_36_285"><span class="d2l-menuflyout-spacer">&nbsp;</span></div>
+											<div class="d2l-clear"></div>
+										</a>
+										<div class="d2l-menuflyout-contents d2l-menuflyout-contents-left d2l_1_26_121 d2l_1_27_586" id="d2l_1_37_830" aria-hidden="true" aria-expanded="false" tabindex="0" aria-live="assertive" aria-labelledby="d2l_c_2_120" style="max-height: 1224px;">
+											<div class="d2l-menuflyout-group-container">
+												<div class="d2l_1_29_580">
+													<div>
+														<div id="AB_DL_PH_Grades" class="d2l-placeholder d2l-placeholder-live" aria-live="assertive">
+															<div class="d2l-loading"><div class="d2l-textblock d2l-offscreen">Loading...</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="d2l-minibar-separator"></div><div class="d2l-menuflyout d2l-menuflyout-closed d2l-menuflyout-light d2l-left" id="d2l_1_11_213">
+										<a class="d2l-menuflyout-opener d2l-clickable" title="Subscription alerts" onclick="return false;" tabindex="0" role="button" aria-controls="d2l_1_42_679" aria-labelledby="d2l_c_3_467">
+											<span class="d2l-menuflyout-text d2l-offscreen" id="d2l_c_3_467">Subscription alerts</span><div class="d2l-minibar-activity-buckethandle alert_bucket_Alerts">
+												<img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="Alert d2l_1_38_136"><img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="NewAlert d2l-hidden d2l_1_39_231"><img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="OpenAlert d2l-hidden d2l_1_40_763"><img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="" class="NewOpenAlert d2l-hidden d2l_1_41_254"><span class="d2l-menuflyout-spacer">&nbsp;</span></div>
+											<div class="d2l-clear"></div>
+										</a>
+										<div class="d2l-menuflyout-contents d2l-menuflyout-contents-left d2l_1_26_121 d2l_1_27_586" id="d2l_1_42_679" aria-hidden="true" aria-expanded="false" tabindex="0" aria-live="assertive" aria-labelledby="d2l_c_3_467" style="max-height: 1224px;">
+											<div class="d2l-menuflyout-group-container">
+												<div class="d2l_1_29_580">
+													<div>
+														<div id="AB_DL_PH_Alerts" class="d2l-placeholder d2l-placeholder-live" aria-live="assertive">
+															<div class="d2l-loading"><div class="d2l-textblock d2l-offscreen">Loading...</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div><div class="d2l-menuflyout d2l-menuflyout-closed d2l-menuflyout-light">
+									<a class="d2l-menuflyout-opener d2l-clickable" onclick="return false;" tabindex="0" role="button" aria-controls="d2l_1_45_854" aria-labelledby="d2l_c_4_835">
+										<img class="d2l-image d2l-menuflyout-icon d2l_1_43_731" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="">
+										<span class="d2l-menuflyout-text" id="d2l_c_4_835">James Ford</span><span class="d2l-menuflyout-arrow d2l-menuflyout-arrow-open d2l_1_44_315"></span><span class="d2l-menuflyout-arrow d2l_1_18_76 d2l-menuflyout-arrow-closed"></span>
+										<div class="d2l-clear"></div>
+									</a>
+									<div class="d2l-menuflyout-contents d2l-menuflyout-contents-left" id="d2l_1_45_854" aria-hidden="true" aria-expanded="false" tabindex="0" aria-live="assertive" aria-labelledby="d2l_c_4_835" style="max-height: 1224px;">
+										<div class="d2l-menuflyout-group-container">
+											<div>
+												<ul class="d2l-list">
+													<li>
+														<ul style="list-style:none;margin:10px;padding:0;">
+															<li>
+																<span style="white-space:nowrap;"><a class="vui-link vui-outline d2l-link" href="https://mycourses.rit.edu/d2l/lp/profile/profile_edit.d2l?ou=540720" onclick="D2L.O(&quot;__g1&quot;,1)();">Profile</a>
+																</span></li>
+															<li>
+																<span style="white-space:nowrap;"><a class="vui-link vui-outline d2l-link" href="https://mycourses.rit.edu/d2l/Notifications/Settings?ou=540720" onclick="D2L.O(&quot;__g1&quot;,2)();">Notifications</a>
+																</span></li>
+															<li>
+																<span style="white-space:nowrap;"><a class="vui-link vui-outline d2l-link" href="https://mycourses.rit.edu/d2l/lp/preferences/preferences_main/preferences_main.d2l?ou=540720" onclick="D2L.O(&quot;__g1&quot;,3)();">Account Settings</a>
+																</span></li>
+														</ul>
+														<hr class="d2l-minibar-menu-separator"></li>
+													<li>
+														<ul style="list-style:none;margin:10px;padding:0;">
+															<li>
+																<span style="white-space:nowrap;"><a class="vui-link vui-outline d2l-link" href="https://mycourses.rit.edu/d2l/le/userprogress/72992/540720/Summary?searchString=&sortDirection=0&sortField=LastName">Progress</a>
+																</span></li>
+														</ul>
+														<hr class="d2l-minibar-menu-separator"></li>
+													<li>
+														<span style="white-space:nowrap;"><a class="vui-link vui-outline d2l-link d2l_1_46_890" href="javascript:void(0);" onclick="D2L.O(&quot;__g1&quot;,4)();return false;">Log Out</a>
+														</span></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="d2l-clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="d2l_navbar" class="d2l-navbar d2l-font-inverse d2l-min-width" role="navigation">
+			<h2 class="d2l-offscreen">Navigation</h2>
+			<div class="d2l-navbar-container d_nb_cFull">
+				<div class="d2l-max-width">
+					<div class="d2l-navbar-container d_nb_cGlobal">
+						<div class="d2l-box-layout d2l_1_14_634">
+							<div class="d2l-box d2l-box-v d2l_1_47_482">
+								<div class="d2l-navbar-container d_nb_cTop">
+									<div class="d2l-box-layout d2l_1_14_634">
+										<div class="d2l-box d2l-box-h AreaBoxTopLeft d2l_1_47_482">
+											<div class="d2l-navbar-area d_nb_pTopLeft">
+												<div class="d_nb_pd">
+													<div class="d_nb_i">
+													</div>
+													<div class="d2l-clear"></div>
+												</div>
+											</div>
+										</div>
+										<div class="d2l-box d2l-box-h AreaBoxTopRight d2l_1_47_482">
+											<div class="d2l-navbar-area d_nb_pTopRight">
+												<div class="d_nb_pd">
+													<div class="d_nb_i">
+														<ul class="d2l-navbar-area-list">
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" onclick="D2L.O(&quot;__g1&quot;,5)(); return false;" href="http://library.rit.edu/D2L/nextgen/mylibrary.php?role_name=Student&course_code=CSCI33101.2145"><span>My Library</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/lms/locker/locker.d2l?ou=540720"><span>Locker</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li class="d2l-navbar-area-list-item-last">
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" onclick="D2L.O(&quot;__g1&quot;,6)(); return false;" href="https://wiki.rit.edu/display/myCoursesHR/Home"><span>Help</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+														</ul>
+													</div>
+													<div class="d2l-clear"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="d2l-clear"></div>
+								</div>
+							</div>
+							<div class="d2l-box d2l-box-v d2l_1_47_482">
+								<div class="d2l-navbar-container d_nb_cMiddle">
+									<div class="d2l-box-layout d2l_1_14_634">
+										<div class="d2l-box d2l-box-h d2l_1_48_616 d2l_1_47_482">
+										</div>
+										<div class="d2l-box d2l-box-h d2l_1_15_313">
+											<div class="d2l-navbar-title">
+												CSCI.331.01/03 - Intro to Intelligent Systems (CSCI33101.2145)</div>
+										</div>
+										<div class="d2l-box d2l-box-h d2l_1_48_616 d2l_1_47_482">
+										</div>
+									</div>
+									<div class="d2l-clear"></div>
+								</div>
+							</div>
+							<div class="d2l-box d2l-box-v d2l_1_47_482">
+								<div class="d2l-navbar-container d_nb_cBottom">
+									<div class="d2l-box-layout d2l_1_14_634">
+										<div class="d2l-box d2l-box-h AreaBoxBottomLeft d2l_1_47_482">
+											<div class="d2l-navbar-area d_nb_pBottomLeft">
+												<div class="d_nb_pd">
+													<div class="d_nb_i">
+													</div>
+													<div class="d2l-clear"></div>
+												</div>
+											</div>
+										</div>
+										<div class="d2l-box d2l-box-h AreaBoxBottomRight d2l_1_47_482">
+											<div class="d2l-navbar-area d_nb_pBottomRight">
+												<div class="d_nb_pd">
+													<div class="d_nb_i">
+														<ul class="d2l-navbar-area-list">
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/le/content/540720/Home"><span>Content</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/le/calendar/540720"><span>Calendar</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/lms/classlist/classlist.d2l?ou=540720"><span>Classlist</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/lms/group/group_list.d2l?ou=540720"><span>Groups</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/lms/dropbox/dropbox.d2l?ou=540720"><span>Dropbox
+</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/le/540720/discussions/List"><span>Discussions</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/lms/chat/chat_list.d2l?ou=540720"><span>Chat</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/lms/survey/surveys.d2l?ou=540720"><span>Surveys</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li>
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/lms/quizzing/quizzing.d2l?ou=540720"><span>Quizzes</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+															<li class="d2l-navbar-area-list-item-last">
+																<div class="d2l-navbar-item">
+																	<a class="d2l-navbar-link" href="https://mycourses.rit.edu/d2l/lms/grades/index.d2l?ou=540720"><span>Grades</span></a></div>
+																<span class="d2l-navbar-sep"></span>
+															</li>
+														</ul>
+													</div>
+													<div class="d2l-clear"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="d2l-clear"></div>
+								</div>
+							</div>
+						</div>
+						<div class="d2l-clear"></div>
+					</div>
+				</div>
+				<div class="d2l-clear"></div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			
+(function(){
+var hpn=function(){
+if(window == window.parent) {return false;}
+var win = window.parent;
+try {while(true) {
+if(win.document === undefined) {return false;}
+var n= win.document.getElementById('d2l_navbar');
+var m = win.document.getElementById('d2l_minibar');
+if(n !== null || m !== null) {return true;}
+if(win == win.parent) {return false;}
+win = win.parent;
+}} catch(e) {}
+return false;};
+if(!hpn()) {return;}
+var rm=function(n) {if(n&&n.parentNode){n.parentNode.removeChild(n);}};
+var d=document;
+rm(d.getElementById('d2l_navbar'));
+rm(d.getElementById('d2l_minibar'));
+rm(d.getElementById('d2l_minibar_placeholder'));
+rm(d.getElementById('d2l_skipnav'));
+})();
+</script>
+		<span class="d2l-fragment"><a name="d2l_1_12_709" style="top: -44px;"></a></span>
+		<div class="d2l-page-message-container"><div class="d2l-page-message" id="d2l_sessionExpiryWarning"><div style="display:none;" id="d2l_sessionExpiryAlert" role="alert"><div class="d2l-container-icon d2l_1_49_135 d2l_1_50_162">
+			<div class="d2l-container-icon-inner d2l_1_51_477 d2l_1_52_204 d2l_1_53_223 d2l_1_54_781">
+				<h2 class="d2l-heading vui-heading-2">Are You Still There?</h2>
+				<div class="d2l-textblock">Your session expires after 480 minutes of inactivity, which protects your information in case you've left your device without logging out.<br>
+<br>
+<strong>Hit a key or click anywhere to stay logged in.</strong></div>
+			</div>
+		</div>
+		</div><div style="display:none;" id="d2l_sessionExpiryCheck" role="alert"><div class="d2l-container-icon d2l_1_49_135 d2l_1_50_162">
+			<div class="d2l-container-icon-inner d2l_1_55_780 d2l_1_52_204 d2l_1_53_223 d2l_1_54_781">
+				<div class="d2l_1_56_24">
+					<h2 class="d2l-heading vui-heading-2">Oh, There You Are!</h2>
+				</div>
+			</div>
+		</div>
+		</div></div>
+		</div>
+		<div class="d2l-page-bg">
+			<div>
+			</div>
+		</div>
+		<div class="d2l-page-main d2l-min-width d2l-max-width" role="main">
+			<div class="d2l-page-collapsepane-container" style="min-height: 1154px; top: 136px;"><div class="d2l-page-collapsepane-shadow" title="Expand side panel"><div></div></div><div class="d2l-page-collapsepane" data-openfirst="D2L.O(&quot;__g1&quot;,7)();"><span tabindex="-1" class="d2l-offscreen"></span><div class="d2l-page-collapsepane-handle"><h2 class="d2l-heading vui-offscreen">Side Panel</h2>
+			<a class="d2l-page-collapsepane-handle-link" tabindex="0" title="Expand side panel" role="button"><span class="d2l-page-collapsepane-handle-expand d2l-offscreen">Expand side panel</span><span class="d2l-page-collapsepane-handle-collapse d2l-offscreen">Collapse side panel</span></a></div><div class="d2l-page-collapsepane-content"><div class="d2l-page-collapsepane-content-inner d2l-scrollbar" style="max-height: 1109px;"><div class="d2l-page-collapsepane-content-padding"><div id="ContentNavigator" class="d2l-placeholder d2l-placeholder-live" aria-live="assertive">
+				<div class="d2l-loading"><div class="d2l-textblock d2l-offscreen">Loading...</div>
+				</div>
+			</div>
+			</div></div></div><div class="d2l-page-collapsepane-end"></div><span tabindex="-1" class="d2l-offscreen"></span></div></div><div class="d2l-page-main-padding">
+				<div class="d2l-page-header">
+					<div class="d2l-box-layout d2l_1_14_634">
+						<div class="d2l-box d2l-box-v d2l_1_57_503">
+							<div class="d2l-box-layout d2l_1_14_634">
+								<div class="d2l-box d2l-box-h d2l_1_58_90 d2l_1_47_482">
+									<nav role="navigation">
+										<h2 class="d2l-heading vui-offscreen" id="d2l_1_59_127">Breadcrumb:</h2>
+										<ol class="d2l-breadcrumbs d2l_1_60_398" aria-labelledby="d2l_1_59_127">
+											<li class="d2l-breadcrumb"><a class="vui-link vui-outline d2l-link" href="javascript:void(0);" onclick="D2L.O(&quot;__g1&quot;,8)();return false;">Table of Contents</a>
+											</li><li class="d2l-breadcrumb"><a class="vui-link vui-outline d2l-link" href="https://mycourses.rit.edu/d2l/le/content/540720/Home?itemIdentifier=D2L.LE.Content.ContentObject.ModuleCO-3284840">HW</a>
+											</li><li class="d2l-breadcrumb d2l-page-breadcrumb-title d2l-breadcrumb-last"><span class="d2l-breadcrumb-text">proj1</span></li></ol>
+									</nav>
+								</div>
+							</div>
+						</div>
+						<div class="d2l-box d2l-box-v d2l_1_57_503">
+							<div class="d2l-box-layout d2l_1_14_634">
+								<div class="d2l-box d2l-box-h d2l_1_58_90 d2l_1_47_482">
+									<div class="d2l-page-title-c"><div class="d2l-box-layout d2l_1_61_976">
+										<div class="d2l-box d2l-box-h d2l_1_62_915 d2l_1_47_482">
+											<img class="d2l-image d2l_1_63_530 d2l_1_64_558" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt="">
+										</div>
+										<div class="d2l-box d2l-box-h d2l_1_58_90 d2l_1_47_482">
+											<h1 class="d2l-page-title d2l-heading vui-heading-1">proj1</h1>
+											<div id="d2l_1_65_844" class="d2l-floating-container d2l-hidden d2l-floating-container-autoclose" role="menu" tabindex="-1">
+												<ul id="d2l_pageTitleActions" class="d2l-contextmenu" role="presentation">
+													<li id="d2l_1_66_205" class="d2l-contextmenu-item" role="presentation">
+														<a class="d2l_1_67_356" tabindex="-1" role="menuitem"><span>Send to Binder</span></a>
+													</li>
+													<li id="d2l_1_68_197" class="d2l-contextmenu-item" role="presentation">
+														<a class="d2l_1_69_778" tabindex="-1" role="menuitem"><span>Submit feedback for this topic</span></a>
+													</li>
+													<li id="d2l_1_70_28" class="d2l-contextmenu-item" role="presentation">
+														<a class="d2l_1_71_657" tabindex="-1" role="menuitem"><span>Download</span></a>
+													</li>
+												</ul>
+											</div>
+											<a id="d2l_1_4_841" class="d2l-contextmenu-ph" data-contextmenuid="d2l_pageTitleActions" title="Actions for &#39;proj1&#39;" onclick="D2L.O(&quot;__g1&quot;,9)();return false;" href="javascript:void(0);" aria-haspopup="true">
+												<img src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" class="d2l_1_73_844" alt="">
+												<span class="d2l-offscreen">Actions for 'proj1'</span>
+											</a>
+											<div class="d2l-clear"></div>
+											<div class="d2l-page-title-view"><h2 class="d2l-heading vui-offscreen">Web Page</h2>
+											</div></div>
+									</div>
+									</div></div>
+								<div class="d2l-box d2l-box-h d2l_1_57_503">
+									<div class="d2l-page-header-side">
+										<div class="d2l_1_74_188 d2l-inline">
+											<a class="d2l-imagelink d2l_1_77_743 d2l_1_78_474" id="d2l_1_75_648" href="javascript:void(0);" onclick="return false;" data-hoverclassname="d2l_1_78_474" title="Add Bookmark" role="button"><span class="d2l-offscreen">Add Bookmark</span></a>
+											<a class="d2l-imagelink d2l-hidden d2l_1_79_287 d2l_1_80_821" id="d2l_1_76_968" href="javascript:void(0);" onclick="return false;" data-hoverclassname="d2l_1_80_821" title="Remove Bookmark" role="button"><span class="d2l-offscreen">Remove Bookmark</span></a>
+										</div>
+										<div class="d2l_1_74_188 d2l-inline">
+											<a class="d2l-imagelink d2l_1_82_969 d2l_1_83_27" id="d2l_1_81_638" href="javascript:void(0);" onclick="return false;" data-hoverclassname="d2l_1_83_27" title="View content in new window" role="button"><span class="d2l-offscreen">View content in new window</span></a>
+										</div>
+										<div class="d2l_1_84_417 d2l-inline">
+											<div class="d2l-iterator">
+												<a class="d2l-iterator-button d2l-button-nml d2l-iterator-button-prev d2l-iterator-button-notext" role="button" href="https://mycourses.rit.edu/d2l/le/content/540720/navigateContent/82/Previous?pId=3284840" title="Previous "><img class="d2l-image d2l_1_85_762" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt=""><span class="d2l-offscreen">Previous </span>&nbsp;</a><a class="d2l-iterator-button d2l-button-nml d2l-iterator-button-next d2l-iterator-button-notext" role="button" href="https://mycourses.rit.edu/d2l/le/content/540720/navigateContent/82/Next?pId=3284840" title="Next "><span class="d2l-offscreen">Next </span>&nbsp;<img class="d2l-image d2l_1_86_332" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt=""></a></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="d2l-messagearea d2l_1_87_783" id="d2l_messagearea" role="alert" tabindex="0"></div><div id="ContentView" class="d2l-placeholder d2l-placeholder-live" aria-live="assertive">
+					<div id="d2l_le_content_printcontainer">
+						<div class="d2l-fileviewer"><div class="d2l-fileviewer-text" data-location="/content/enforced2/540720-CSCI33101.2145/proj1.html?d2lSessionVal=pROCaMqsdacs8Cf9nQIwswlcD&amp;ou=540720" data-title="proj1.html" data-isprintable="True"><div class="d2l-iframe-loading-container d2l_1_58_90 d2l_1_89_759" style="display: none;">
+							</div>
+							<iframe class="d2l-iframe d2l-iframe-fit-user-content d2l_1_58_90 d2l_1_89_759" id="d2l_1_88_570" onload="this.m_loaded = true;" name="d2l_1_88_570" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/proj1.html" title="proj1.html" frameborder="0" scrolling="auto" style="height: 1990px;"></iframe>
+							</div></div>
+					</div>
+				</div>
+				<div class="d2l_1_90_831">
+					<div class="d2l-left">
+						<a class="vui-button d2l-button" id="d2l_1_6_564" role="button" tabindex="0"><span class="vui-icon-d2l d2l_1_91_780"></span> Send to Binder</a>
+						<a class="vui-button d2l-button" id="d2l_1_7_79" role="button" tabindex="0"><span class="vui-icon-d2l d2l_1_92_740"></span> Download</a>
+						<a class="vui-button d2l-button" id="d2l_1_8_112" role="button" tabindex="0"><span class="vui-icon-d2l d2l_1_93_8"></span> Print</a>
+					</div>
+					<div class="d2l-right">
+						<div class="d2l_1_84_417 d2l-inline">
+							<div class="d2l-iterator">
+								<a class="d2l-iterator-button d2l-button-nml d2l-iterator-button-prev d2l-iterator-button-notext" role="button" href="https://mycourses.rit.edu/d2l/le/content/540720/navigateContent/82/Previous?pId=3284840" title="Previous "><img class="d2l-image d2l_1_85_762" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt=""><span class="d2l-offscreen">Previous </span>&nbsp;</a><a class="d2l-iterator-button d2l-button-nml d2l-iterator-button-next d2l-iterator-button-notext" role="button" href="https://mycourses.rit.edu/d2l/le/content/540720/navigateContent/82/Next?pId=3284840" title="Next "><span class="d2l-offscreen">Next </span>&nbsp;<img class="d2l-image d2l_1_86_332" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/pixel.gif" alt=""></a></div>
+						</div>
+					</div>
+					<div class="d2l-clear"></div>
+				</div>
+				<div class="d2l-sep d2l-sep-s d2l-sep-t"><hr></div>
+				<div class="d2l_1_94_831">
+					<div class="d2l-collapsepane">
+						<div class="d2l-collapsepane-header d2l_1_97_148 d2l_1_98_173">
+							<span id="d2l_1_96_337" class="d2l-expandcollapse d2l-right">
+								<a class="d2l-imagelink d2l-right d2l-hidden d2l_1_100_648 vui-outline" id="d2l_1_99_470" href="javascript:void(0);" onclick="return false;" title="Expand Activity Details" role="button"><span class="d2l-offscreen">Expand Activity Details</span></a>
+								<a class="d2l-imagelink d2l-right d2l_1_102_284 vui-outline" id="d2l_1_101_534" href="javascript:void(0);" onclick="return false;" title="Collapse Activity Details" role="button"><span class="d2l-offscreen">Collapse Activity Details</span></a>
+							</span>
+							<h2 class="d2l-heading vui-heading-3 d2l-left" id="d2l_1_96_337_h">Activity Details</h2>
+							<div class="d2l-clear"></div>
+						</div>
+						<div class="d2l-collapsepane-content d2l_1_103_837 d2l_1_104_106 d2l_1_105_504" id="d2l_1_95_786">
+							<div class="d2l-box-layout d2l_1_14_634">
+								<div class="d2l-box d2l-box-h d2l_1_58_90 d2l_1_57_503">
+									<div class="d2l_1_106_292">
+										<div class="d2l-inline">
+											<div id="d2l_1_0_429" class="d2l-placeholder d2l-placeholder-live" aria-live="assertive">
+												<form data-method="post" data-scope="" class="d2l-form d2l-form-primary" id="CompletionTaskForm" onsubmit="return false;">
+													<div class="d2l-inline">
+														<div class="d2l-container-icon d2l_1_49_135 d2l_1_107_359 d2l_1_49_135 d2l_1_108_35 d2l_1_109_133">
+															<div class="d2l-textblock d2l-textblock-emphasis">You have viewed this topic</div>
+														</div>
+													</div>
+													<div class="d2l-inline">
+													</div>
+												<input type="text" class="d2l-hidden"></form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="ResultDetails" class="d2l-placeholder d2l-placeholder-inner d2l-placeholder-live" aria-live="assertive">
+				</div>
+				<div class="d2l-sep d2l-sep-s d2l-sep-t d2l-sep-b"><hr></div>
+				<div id="StatusPlaceholder" class="d2l-placeholder d2l-placeholder-live" aria-live="assertive">
+					<div class="d2l-textblock d2l-textblock-secondary d2l-textblock-emphasis">Last Visited Feb 27, 2015 5:27 PM</div>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/jquery-1.10.2-ui-1.10.3.min.js"></script>
+		<script type="text/javascript" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/valenceui.min.js"></script>
+		<script type="text/javascript" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/D2L.LP.Web.Desktop.default.js"></script>
+		<script type="text/javascript" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/D2L.LE.Content.ContentViewer.default.js"></script>
+		<script type="text/javascript" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/D2L.LE.Content.Web.Desktop.default.js"></script>
+		<script type="text/javascript" src="./proj1 - CSCI.331.01 03 - Intro to Intelligent Systems_files/D2L.LE.ToolIntegration.Content.default.js"></script>
+		<script type="text/javascript">
+		//<![CDATA[
+			D2L.LP.Web.UI.Events.OnInit.AddListener( function() {
+D2L.O("__g1",19)();
+D2L.O("__g1",20)();
+D2L.O("__g1",21)();
+D2L.O("__g1",22)();
+D2L.O("__g1",23)();
+D2L.O("__g1",24)();
+D2L.O("__g1",25)();
+D2L.O("__g1",26)();
+D2L.O("__g1",27)();
+D2L.O("__g1",28)();
+D2L.O("__g1",29)();
+D2L.O("__g1",30)();
+} );
+
+			D2L.LP.Web.UI.Events.OnLoad.AddListener( function() {
+D2L.O("__g1",31)();
+D2L.O("__g1",32)();
+D2L.O("__g1",33)();
+} );
+
+			D2L.OR={
+"d2l_1_17_321":{"MenuFlyout.OpenFirstFunction":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialRender\",\"P\":[{\"_type\":\"id\",\"Value\":\"courseSelectorId\"},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectPartial\",\"P\":[{\"_type\":\"id\",\"Value\":\"courseSelectorId\"},\"GET\",{\"_type\":\"url\",\"Url\":\"\/d2l\/lp\/courseSelector\/540720\/InitPartial\"},{\"_type\":\"D2L.LP.Util.Dictionary\"},{\"_type\":\"D2L.LP.Web.UI.Rpc.RpcOptions\",\"keepAlive\":true}],\"D\":true},0],\"D\":true}"}
+,
+"courseSelectorId":{"0":"{\"_type\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialHtmlRenderContext\",\"HeadingLevel\":2,\"ValidClassNames\":[],\"Scope\":\"\"}"}
+,
+"d2l_1_9_799":{"MenuFlyout.OpenFunction":"{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.CompareBoolean\",\"P\":[1,{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"ab_status_Messages\"]},true]},{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialRender\",\"P\":[{\"_type\":\"id\",\"Value\":\"AB_DL_PH_Messages\"},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectPartial\",\"P\":[{\"_type\":\"id\",\"Value\":\"AB_DL_PH_Messages\"},\"GET\",{\"_type\":\"call\",\"N\":\"D2L.LP.Web.Mvc.RouteLocation.Create\",\"P\":[\"\/d2l\/MiniBar\/{orgUnitId}\/ActivityFeed\/{action}\",{\"_type\":\"D2L.LP.Util.Dictionary\",\"Category\":2},{\"_type\":\"D2L.LP.Util.Dictionary\",\"action\":\"GetAlerts\",\"orgUnitId\":540720}]},{\"_type\":\"D2L.LP.Util.Dictionary\"},{\"_type\":\"D2L.LP.Web.UI.Rpc.RpcOptions\",\"keepAlive\":true}],\"D\":true},0],\"D\":true}]}],\"D\":true},{\"_type\":\"func\",\"N\":\"D2L.VS\",\"P\":[\"ab_status_Messages\",false]},{\"_type\":\"func\",\"N\":\"D2L.LP.ActivityBar.OpenBucket\",\"P\":[\"alert_bucket_Messages\"]}]}",
+"MenuFlyout.CloseFunction":"{\"_type\":\"func\",\"N\":\"D2L.LP.ActivityBar.CloseBucket\",\"P\":[\"alert_bucket_Messages\"]}"}
+,
+"alert_bucket_Messages":{"aria-message":"\"You have new Messages\"",
+"title":"\"Message alerts\"",
+"new-alert-title":"\"Message alerts - You have new alerts\"",
+"flyout-id":"{\"_type\":\"id\",\"Value\":\"d2l_1_9_799\"}"}
+,
+"__g1":{"0":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.OpenWindow\",\"P\":[\"D2L.LE.Pager\",{\"_type\":\"url\",\"Url\":\"\/d2l\/p\/le\/pager\/540720\"},650,730,false,false]}",
+"1":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.ReturnPoints.Set\",\"P\":[\"D2L.UXP.Profile.6605.72992\"]}",
+"2":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.ReturnPoints.Set\",\"P\":[\"D2L.LP.Notification.Settings.540720\"]}",
+"3":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.ReturnPoints.Set\",\"P\":[\"D2L.UXP.Preferences.540720\"]}",
+"4":"{\"_type\":\"func\",\"N\":\"D2L.PT.Auth.Logout\",\"P\":[\"\/d2l\/logout\"]}",
+"5":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.OpenWindow\",\"P\":[\"NavbarLink_15671\",{\"_type\":\"url\",\"Url\":\"http:\/\/library.rit.edu\/D2L\/nextgen\/mylibrary.php?role_name=Student&course_code=CSCI33101.2145\"},1024,768,true,false]}",
+"6":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.OpenWindow\",\"P\":[\"NavbarLink_15679\",{\"_type\":\"url\",\"Url\":\"https:\/\/wiki.rit.edu\/display\/myCoursesHR\/Home\"},1024,768,true,true]}",
+"7":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialRender\",\"P\":[{\"_type\":\"id\",\"Value\":\"ContentNavigator\"},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectPartial\",\"P\":[{\"_type\":\"id\",\"Value\":\"ContentNavigator\"},\"GET\",{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/viewobject\/3316600\/PartialNavigator?mId=3284840\"},{\"_type\":\"D2L.LP.Util.Dictionary\"},{\"_type\":\"D2L.LP.Web.UI.Rpc.RpcOptions\",\"keepAlive\":true}],\"D\":true},0],\"D\":true}",
+"8":"{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.Navigate\",\"P\":[{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/Home?itemIdentifier=TOC\"}]}]}",
+"9":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.Controls.ContextMenu.Open\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_pageTitleActions\"},{\"_type\":\"id\",\"Value\":\"d2l_1_4_841\"},\"d2l_1_72_184\",null]}",
+"10":"{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.SetIsDisplayed\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_76_968\"},true]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.SetIsDisplayed\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_75_648\"},false]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.Focus\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_76_968\"}]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.Connect\",\"P\":[\"POST\",{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/viewContent\/3316600\/ToggleBookmark?bookmarkStatus=1\"}],\"D\":true}]}",
+"11":"{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.SetIsDisplayed\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_75_648\"},true]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.SetIsDisplayed\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_76_968\"},false]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.Focus\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_75_648\"}]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.Connect\",\"P\":[\"POST\",{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/viewContent\/3316600\/ToggleBookmark?bookmarkStatus=0\"}],\"D\":true}]}",
+"12":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.OpenWindow\",\"P\":[\"proj1\",{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/fullscreen\/3316600\/View\"},1280,800,false,false]}",
+"13":"{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.CompareBoolean\",\"P\":[1,{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectObject\",\"P\":[\"GET\",{\"_type\":\"url\",\"Url\":\"\/d2l\/ed\/ent\/login\/HasToken?categoryName=Binder\"}],\"D\":true},false]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.MasterPages.Dialog.Open\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_6_564\"},{\"_type\":\"url\",\"Url\":\"\/d2l\/ed\/ent\/login\/InitiateLogin?categoryName=Binder\"}],\"D\":true}],\"D\":true},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.Connect\",\"P\":[\"POST\",{\"_type\":\"url\",\"Url\":\"\/d2l\/binder\/contentBinder\/540720\/object\/3316600\/SingleSendToBinder\"}],\"D\":true}]}",
+"14":"{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.VS\",\"P\":[\"CheckTopicFileJSVariable\",{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectObject\",\"P\":[\"GET\",{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/topics\/files\/download\/3316600\/CheckFileTopicInfo\"}],\"D\":true}]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.ObjectAccessor\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"CheckTopicFileJSVariable\"]},\"IsBroken\"]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.MasterPages.Dialog.InlineDialog\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_4_841\"},null,\"Error\",\"Unable to download. The file associated with this content topic cannot be found.\",\"\",\"Ok\",\"\",\"Close this Dialog\",\"d2l-dialog-inline-body-alert\",null,null,null,true,false,false],\"D\":true},true,{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.ObjectAccessor\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"CheckTopicFileJSVariable\"]},\"IsPackageable\"]},{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.VS\",\"P\":[\"DownloadProgressDialogResultJSVariable\",{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Desktop.MasterPages.Dialog.Open\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_4_841\"},{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/3316600\/startdownload\/InitiateTopicDownload?openerId=d2l_1_4_841\"}],\"D\":true}]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.CompareNumber\",\"P\":[5,{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"DownloadProgressDialogResultJSVariable\"]},0]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.Navigate\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.Mvc.RouteLocation.Create\",\"P\":[\"\/d2l\/le\/content\/{orgUnitId}\/downloads\/{downloadType}\/{jobId}\/{action}\",{\"_type\":\"D2L.LP.Util.Dictionary\"},{\"_type\":\"D2L.LP.Util.Dictionary\",\"action\":\"Download\",\"orgUnitId\":540720,\"downloadType\":\"Topic\",\"jobId\":{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"DownloadProgressDialogResultJSVariable\"]}}]}]},true,null],\"D\":true}]},true,{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.Navigate\",\"P\":[{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/topics\/files\/download\/3316600\/DirectFileTopicDownload\"}]}],\"D\":true}],\"D\":true}]}",
+"15":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.Controls.FileViewer.TryPrint\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_le_content_printcontainer\"}]}",
+"16":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Common.Controls.ExpandCollapse.Toggle\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_96_337\"}]}",
+"17":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.SetIsDisplayed\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_95_786\"},true]}",
+"18":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.SetIsDisplayed\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_95_786\"},false]}",
+"19":"{\"_type\":\"func\",\"N\":\"D2L.VS\",\"P\":[\"ab_status_Messages\",true]}",
+"20":"{\"_type\":\"func\",\"N\":\"D2L.VS\",\"P\":[\"ab_status_Grades\",true]}",
+"21":"{\"_type\":\"func\",\"N\":\"D2L.VS\",\"P\":[\"ab_status_Alerts\",true]}",
+"22":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.Controls.FloatingContainer.Init\"}",
+"23":"{\"_type\":\"func\",\"N\":\"D2L.PT.Auth.SessionTimeout.Init\",\"P\":[\"72992\",480,5,{\"_type\":\"id\",\"Value\":\"d2l_sessionExpiryWarning\"},\"d2l_sessionExpiryAlert\",\"d2l_sessionExpiryCheck\",{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectObject\",\"P\":[\"POST\",{\"_type\":\"url\",\"Url\":\"\/d2l\/lp\/auth\/session\/extend\"}],\"D\":true},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.MasterPages.Dialog.OpenHelper\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.Dom.GetActiveElement\"},{\"_type\":\"url\",\"Url\":\"\/d2l\/lp\/auth\/session\/Expired?isUsernamePasswordLogin=1&isLogout=0\"}],\"D\":true},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.MasterPages.Dialog.OpenHelper\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.Dom.GetActiveElement\"},{\"_type\":\"url\",\"Url\":\"\/d2l\/lp\/auth\/session\/Expired?isUsernamePasswordLogin=1&isLogout=1\"}],\"D\":true},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.MasterPages.Dialog.InlineDialog\",\"P\":[null,{\"_type\":\"id\",\"Value\":\"d2l_1_110_811\"},\"Warning\",\"New User Session\",\"The current user session has changed, so the links and content on this page may not behave as expected.\",\"Ok\",\"\",\"Close this Dialog\",\"d2l-dialog-inline-body-warning\",null,null,null,true,false,false],\"D\":true},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.MasterPages.Dialog.Inline.Abort\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_110_811\"}]}]}",
+"24":"{\"_type\":\"func\",\"N\":\"D2LMathML.DesktopInit\",\"P\":[\"\/d2l\/common\/mathjax\/2.1\/MathJax.js?config=MML_HTMLorMML&v=10.3.0.791-109\",\"\/d2l\/common\/mathjax\/2.1\/MathJax.js?config=TeX-AMS-MML_HTMLorMML&v=10.3.0.791-109\"]}",
+"25":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.Authentication.Xsrf.Init\",\"P\":[\"d2l_referrer\",\"h5NSggkrTOb1JurkI54jLBMiG0sNoGeh\",1283655613]}",
+"26":"{\"_type\":\"func\",\"N\":\"D2L.LP.ActivityBar.Init\",\"P\":[{\"_type\":\"url\",\"Url\":\"\/d2l\/activityFeed\/checkForNewAlerts\"},900,\"alert_bucket_{0}\",\"ab_status_{0}\"]}",
+"27":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Common.Controls.MessageArea.Init\",\"P\":[\"d2l_messagearea\",{\"_type\":\"url\",\"Url\":\"\/d2l\/lp\/validation\/errors\"}]}",
+"28":"{\"_type\":\"func\",\"N\":\"D2L.LP.Globalization.Locale.Init\",\"P\":[0,{\"_type\":\"anon\",\"DecimalSeparator\":\".\",\"GroupSeparator\":\",\",\"NumberNegativePattern\":1,\"PercentPositivePattern\":0,\"PercentNegativePattern\":0,\"PercentSymbol\":\"%\",\"NegativeSign\":\"-\",\"NativeDigits\":[\"0\",\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\"],\"UseNativeDigits\":false,\"GroupSizes\":[0],\"IntegerRegex\":\"^([\\\\(-]*(([01234567890123456789]+))[\\\\)-]*)$|^([\\\\(-]*[01234567890123456789]+[\\\\)-]*)$\",\"DecimalRegex\":\"^([\\\\(-]*(([01234567890123456789]+))(\\\\.[01234567890123456789]+)?[\\\\)-]*)$|^([\\\\(-]*[01234567890123456789]*\\\\.?[01234567890123456789]+[\\\\)-]*)$\"},{\"_type\":\"anon\",\"InputDateFormat\":\"M\/d\/yyyy\",\"Is24HourClock\":false,\"NativeDigits\":[\"0\",\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\"],\"UseNativeDigits\":false,\"TimeFormat\":\"h:mm tt\",\"AmDesignator\":\"AM\",\"PmDesignator\":\"PM\",\"ShortMonthNames\":[\"Jan\",\"Feb\",\"Mar\",\"Apr\",\"May\",\"Jun\",\"Jul\",\"Aug\",\"Sep\",\"Oct\",\"Nov\",\"Dec\",\"\"],\"ShortDayOfWeekNames\":[\"Sun\",\"Mon\",\"Tue\",\"Wed\",\"Thu\",\"Fri\",\"Sat\"]},{\"_type\":\"anon\",\"TextDirection\":1},{\"_type\":\"anon\",\"Culture\":\"en-us\"},{\"_type\":\"anon\",\"JustNow\":\"just now\",\"OneMinuteAgo\":\"1 minute ago\",\"TwoMinutesAgo\":\"2 minutes ago\",\"MinutesAgoMany\":\"[0] minutes ago\",\"OneHourAgo\":\"1 hour ago\",\"TwoHoursAgo\":\"2 hours ago\",\"ManyHoursAgo\":\"[0] hours ago\",\"YesterdayTime\":\"yesterday at [0]\",\"DayOfWeekTime\":\"[0] at [1]\",\"MonthDayTime\":\"[0] at [1]\",\"Now\":{\"_type\":\"D2L.LocalDateTime\",\"Year\":2015,\"Month\":3,\"Day\":19,\"Hour\":11,\"Minute\":14,\"Second\":37}}]}",
+"29":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.Initialize\",\"P\":[{\"_type\":\"url\",\"Url\":\"\/d2l\/login?target=%2fd2l%2fle%2fcontent%2f540720%2fviewContent%2f3316600%2fView&sessionExpired=1\"},\"Error: unable to complete your request.\",{\"_type\":\"D2L.LP.Util.Dictionary\"},{\"_type\":\"D2L.LP.Util.Dictionary\",\"flash\":{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.FlashMessages.RpcReceivePayloadProvider\"},\"session\":{\"_type\":\"func\",\"N\":\"D2L.PT.Auth.SessionTimeout.RpcReceivePayloadProvider\"},\"messageArea\":{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Common.Controls.MessageArea.RpcReceivePayloadProvider\"},\"OR\":{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.ObjectRepository.RpcReceivePayloadProvider\"},\"JS\":{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.RpcReceiveJsPayloadProvider\"},\"CSS\":{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.RpcReceiveCssPayloadProvider\"},\"ariaMessages\":{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Aria.RpcReceivePayloadProvider\"}}]}",
+"30":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.Controls.InlineHelp.Init\",\"P\":[{\"_type\":\"url\",\"Url\":\"\/d2l\/lp\/inlineHelp\/540720\/help\"}]}",
+"31":"{\"_type\":\"func\",\"N\":\"D2L.LE.ViewContent.ContentViewer.OnLoad\",\"P\":[540720,3316600]}",
+"32":"{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.SetIsDisplayed\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_8_112\"},{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Desktop.Controls.FileViewer.IsPrintable\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_le_content_printcontainer\"}]}]}]}",
+"33":"{\"_type\":\"func\",\"N\":\"D2L.LE.ToolIntegration.Content.CompletionStatusChanged.Actions.RegisterHandler\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialRender\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_0_429\"},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectPartial\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_0_429\"},\"GET\",{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/object\/3316600\/UpdateCompletion\"},{\"_type\":\"D2L.LP.Util.Dictionary\"},{\"_type\":\"D2L.LP.Web.UI.Rpc.RpcOptions\",\"keepAlive\":true}],\"D\":true},0],\"D\":true}]}"}
+,
+"AB_DL_PH_Messages":{"0":"{\"_type\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialHtmlRenderContext\",\"HeadingLevel\":2,\"ValidClassNames\":[],\"Scope\":\"\"}"}
+,
+"d2l_1_10_382":{"MenuFlyout.OpenFunction":"{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.CompareBoolean\",\"P\":[1,{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"ab_status_Grades\"]},true]},{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialRender\",\"P\":[{\"_type\":\"id\",\"Value\":\"AB_DL_PH_Grades\"},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectPartial\",\"P\":[{\"_type\":\"id\",\"Value\":\"AB_DL_PH_Grades\"},\"GET\",{\"_type\":\"call\",\"N\":\"D2L.LP.Web.Mvc.RouteLocation.Create\",\"P\":[\"\/d2l\/MiniBar\/{orgUnitId}\/ActivityFeed\/{action}\",{\"_type\":\"D2L.LP.Util.Dictionary\",\"Category\":1},{\"_type\":\"D2L.LP.Util.Dictionary\",\"action\":\"GetAlerts\",\"orgUnitId\":540720}]},{\"_type\":\"D2L.LP.Util.Dictionary\"},{\"_type\":\"D2L.LP.Web.UI.Rpc.RpcOptions\",\"keepAlive\":true}],\"D\":true},0],\"D\":true}]}],\"D\":true},{\"_type\":\"func\",\"N\":\"D2L.VS\",\"P\":[\"ab_status_Grades\",false]},{\"_type\":\"func\",\"N\":\"D2L.LP.ActivityBar.OpenBucket\",\"P\":[\"alert_bucket_Grades\"]}]}",
+"MenuFlyout.CloseFunction":"{\"_type\":\"func\",\"N\":\"D2L.LP.ActivityBar.CloseBucket\",\"P\":[\"alert_bucket_Grades\"]}"}
+,
+"alert_bucket_Grades":{"aria-message":"\"You have new Updates\"",
+"title":"\"Update alerts\"",
+"new-alert-title":"\"Update alerts - You have new alerts\"",
+"flyout-id":"{\"_type\":\"id\",\"Value\":\"d2l_1_10_382\"}"}
+,
+"AB_DL_PH_Grades":{"0":"{\"_type\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialHtmlRenderContext\",\"HeadingLevel\":2,\"ValidClassNames\":[],\"Scope\":\"\"}"}
+,
+"d2l_1_11_213":{"MenuFlyout.OpenFunction":"{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.CompareBoolean\",\"P\":[1,{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"ab_status_Alerts\"]},true]},{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialRender\",\"P\":[{\"_type\":\"id\",\"Value\":\"AB_DL_PH_Alerts\"},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectPartial\",\"P\":[{\"_type\":\"id\",\"Value\":\"AB_DL_PH_Alerts\"},\"GET\",{\"_type\":\"call\",\"N\":\"D2L.LP.Web.Mvc.RouteLocation.Create\",\"P\":[\"\/d2l\/MiniBar\/{orgUnitId}\/ActivityFeed\/{action}\",{\"_type\":\"D2L.LP.Util.Dictionary\",\"Category\":0},{\"_type\":\"D2L.LP.Util.Dictionary\",\"action\":\"GetAlerts\",\"orgUnitId\":540720}]},{\"_type\":\"D2L.LP.Util.Dictionary\"},{\"_type\":\"D2L.LP.Web.UI.Rpc.RpcOptions\",\"keepAlive\":true}],\"D\":true},0],\"D\":true}]}],\"D\":true},{\"_type\":\"func\",\"N\":\"D2L.VS\",\"P\":[\"ab_status_Alerts\",false]},{\"_type\":\"func\",\"N\":\"D2L.LP.ActivityBar.OpenBucket\",\"P\":[\"alert_bucket_Alerts\"]}]}",
+"MenuFlyout.CloseFunction":"{\"_type\":\"func\",\"N\":\"D2L.LP.ActivityBar.CloseBucket\",\"P\":[\"alert_bucket_Alerts\"]}"}
+,
+"alert_bucket_Alerts":{"aria-message":"\"You have new Subscriptions\"",
+"title":"\"Subscription alerts\"",
+"new-alert-title":"\"Subscription alerts - You have new alerts\"",
+"flyout-id":"{\"_type\":\"id\",\"Value\":\"d2l_1_11_213\"}"}
+,
+"AB_DL_PH_Alerts":{"0":"{\"_type\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialHtmlRenderContext\",\"HeadingLevel\":2,\"ValidClassNames\":[],\"Scope\":\"\"}"}
+,
+"ContentNavigator":{"0":"{\"_type\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialHtmlRenderContext\",\"HeadingLevel\":2,\"ValidClassNames\":[],\"Scope\":\"\"}"}
+,
+"d2l_1_66_205":{"0":"{\"_type\":\"D2L.LP.Util.Dictionary\",\"enabledIconCss\":\"d2l_1_67_356\",\"disabledIconCss\":\"\",\"onClick\":{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.CompareBoolean\",\"P\":[1,{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectObject\",\"P\":[\"GET\",{\"_type\":\"url\",\"Url\":\"\/d2l\/ed\/ent\/login\/HasToken?categoryName=Binder\"}],\"D\":true},false]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.MasterPages.Dialog.Open\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_4_841\"},{\"_type\":\"url\",\"Url\":\"\/d2l\/ed\/ent\/login\/InitiateLogin?categoryName=Binder\"}],\"D\":true}],\"D\":true},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Rpc.Connect\",\"P\":[\"POST\",{\"_type\":\"url\",\"Url\":\"\/d2l\/binder\/contentBinder\/540720\/object\/3316600\/SingleSendToBinder\"}],\"D\":true}]}}"}
+,
+"d2l_1_68_197":{"0":"{\"_type\":\"D2L.LP.Util.Dictionary\",\"enabledIconCss\":\"d2l_1_69_778\",\"disabledIconCss\":\"\",\"onClick\":{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Legacy.MasterPages.Dialog.Open\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_4_841\"},{\"_type\":\"url\",\"Url\":\"\/d2l\/lms\/content\/viewer\/actions\/submit_feedback_popup.d2l?tId=3316600&ou=540720\"},\"Save\",null,\"\",550,500,\"Close this Dialog\",[{\"_type\":\"D2L.LP.Web.UI.Legacy.MasterPages.DialogLegacy+ButtonData\",\"IsPrimary\":true,\"Key\":\"submitButton\",\"Param\":\"\",\"Text\":\"Submit\",\"ResponseType\":1,\"IsEnabled\":true},{\"_type\":\"D2L.LP.Web.UI.Legacy.MasterPages.DialogLegacy+ButtonData\",\"IsPrimary\":false,\"Key\":\"cancelButton\",\"Param\":\"\",\"Text\":\"Cancel\",\"ResponseType\":0,\"IsEnabled\":true}]],\"D\":true}}"}
+,
+"d2l_1_70_28":{"0":"{\"_type\":\"D2L.LP.Util.Dictionary\",\"enabledIconCss\":\"d2l_1_71_657\",\"disabledIconCss\":\"\",\"onClick\":{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.VS\",\"P\":[\"CheckTopicFileJSVariable\",{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Rpc.ConnectObject\",\"P\":[\"GET\",{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/topics\/files\/download\/3316600\/CheckFileTopicInfo\"}],\"D\":true}]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.ObjectAccessor\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"CheckTopicFileJSVariable\"]},\"IsBroken\"]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.MasterPages.Dialog.InlineDialog\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_4_841\"},null,\"Error\",\"Unable to download. The file associated with this content topic cannot be found.\",\"\",\"Ok\",\"\",\"Close this Dialog\",\"d2l-dialog-inline-body-alert\",null,null,null,true,false,false],\"D\":true},true,{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.ObjectAccessor\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"CheckTopicFileJSVariable\"]},\"IsPackageable\"]},{\"_type\":\"pipe\",\"P\":[{\"_type\":\"func\",\"N\":\"D2L.VS\",\"P\":[\"DownloadProgressDialogResultJSVariable\",{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Desktop.MasterPages.Dialog.Open\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_1_4_841\"},{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/3316600\/startdownload\/InitiateTopicDownload?openerId=d2l_1_4_841\"}],\"D\":true}]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.If\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.UI.Html.JavaScript.CompareNumber\",\"P\":[5,{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"DownloadProgressDialogResultJSVariable\"]},0]},{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.Navigate\",\"P\":[{\"_type\":\"call\",\"N\":\"D2L.LP.Web.Mvc.RouteLocation.Create\",\"P\":[\"\/d2l\/le\/content\/{orgUnitId}\/downloads\/{downloadType}\/{jobId}\/{action}\",{\"_type\":\"D2L.LP.Util.Dictionary\"},{\"_type\":\"D2L.LP.Util.Dictionary\",\"action\":\"Download\",\"orgUnitId\":540720,\"downloadType\":\"Topic\",\"jobId\":{\"_type\":\"call\",\"N\":\"D2L.VG\",\"P\":[\"DownloadProgressDialogResultJSVariable\"]}}]}]},true,null],\"D\":true}]},true,{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Html.Dom.Navigate\",\"P\":[{\"_type\":\"url\",\"Url\":\"\/d2l\/le\/content\/540720\/topics\/files\/download\/3316600\/DirectFileTopicDownload\"}]}],\"D\":true}],\"D\":true}]}}"}
+,
+"d2l_1_65_844":{"onClose":"{\"_type\":\"func\",\"N\":\"D2L.LP.Web.UI.Desktop.Controls.ContextMenu.OnCloseHandler\",\"P\":[{\"_type\":\"id\",\"Value\":\"d2l_pageTitleActions\"}]}"}
+,
+"d2l_pageTitleActions":{"Context":"{\"_type\":\"D2L.LP.Util.Dictionary\",\"floatingContainerId\":{\"_type\":\"id\",\"Value\":\"d2l_1_65_844\"}}"}
+,
+"ContentView":{"0":"{\"_type\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialHtmlRenderContext\",\"HeadingLevel\":2,\"ValidClassNames\":[],\"Scope\":\"\"}"}
+,
+"d2l_1_0_429":{"0":"{\"_type\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialHtmlRenderContext\",\"HeadingLevel\":3,\"ValidClassNames\":[],\"Scope\":\"\"}"}
+,
+"ResultDetails":{"0":"{\"_type\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialHtmlRenderContext\",\"HeadingLevel\":2,\"ValidClassNames\":[],\"Scope\":\"\"}"}
+,
+"StatusPlaceholder":{"0":"{\"_type\":\"D2L.LP.Web.UI.Html.PartialRendering.PartialHtmlRenderContext\",\"HeadingLevel\":2,\"ValidClassNames\":[],\"Scope\":\"\"}"}
+
+};
+
+		//]]>
+		</script>
+	
+</body><div class="gr-context gr-dict gr-context-loader gr-dict-freemium" style="display: none;"><span class="gr-triangle"></span><div class="gr-placeholder"></div><a href="http://www.grammarly.com/?utm_source=dict&utm_medium=link&utm_campaign=chrome_plg" target="_blank" class="gr-hint-settings"></a><strong class="gr-title"></strong><div class="gr-dict-content"></div></div><div class="b-freemium-editor" style="display: none;"><div class="b-freemium-editor-back"></div><iframe class="gr-freemium-ifr"></iframe></div></html>
