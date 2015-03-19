@@ -1,0 +1,152 @@
+
+<!-- saved from url=(0142)https://mycourses.rit.edu/content/enforced2/540720-CSCI33101.2145/proj1.html?d2lSessionVal=pROCaMqsdacs8Cf9nQIwswlcD&ou=540720&d2l_body_type=3 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Route Finding Using Tree Searches</title>
+<script type="text/javascript" src="MathML.js"></script><style type="text/css"></style><script type="text/javascript">D2LMathML.DesktopInit('/d2l/common/mathjax/2.1/MathJax.js?config=MML_HTMLorMML&v=10.3.0.791-109','/d2l/common/mathjax/2.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML&v=10.3.0.791-109');</script><script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({ delayStartupUntil: "onload",showProcessingMessages: false, messageStyle: "none", showMathMenu: true, showMathMenuMSIE: true, menuSettings: { context: "MathJax", zoom: "None" },NativeMML: { showMathMenuMSIE: false, scale: 140 }, "HTML-CSS": { linebreaks: { automatic: true, width: "container"}, imageFont: null, scale: 130 } });</script><script type="text/javascript" src="MathJax.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuTitle {background-color: #CCCCCC; margin: -5px 0 0 0; text-align: center; font-style: italic; font-size: 80%; color: #444444; padding: 2px 0; overflow: hidden}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style></head>
+<body bgcolor="#f6ffff" gram_dict="true" style="overflow-y: hidden;"><div id="MathJax_Message" style="display: none;"></div>
+<div style="text-align: center;">
+  <div style="text-align: center;">
+    <h1>
+      CSCI-331 Programming Project
+    </h1>
+    <h1>
+      Route Finding Using Tree Searches
+    </h1>
+    <h2>
+      Due: Friday, March 20<sup>th</sup>, 2015 by 11:59pm
+    </h2>
+</div>
+</div>
+  
+<hr>
+
+<h2>
+  Project Objective
+</h2>
+
+<p>The objective of this project is to find a path from a given city to another city using various search methods we have discussed in class. The search methods you will implement for this project are breadth-first search, depth-first search, and A* search. This project will be implemented in Java and the main program will be in a file called Search.java.
+</p><hr>
+
+<h2>
+  Project Requirements
+</h2>
+
+<p>Look for all files in the "Proj01.zip" file posted to myCourses. </p>
+<p>A list of cities from this "Map.pdf" is contained in the file "city.dat". Each row in this file corresponds to one city on the map, in the format: CITY STATE LATITUDE LONGITUDE. Each city has a direct route to some of the other cities on the map (you may assume that a "direct route" means a straight path to the city). Thus, the map can be represented by a graph, where the vertices of the graph are cities and the edges of the graph are the direct routes between cities. A list of the direct routes between any two cities is given in the file "edge.dat". Each row in this file corresponds to a direct route connecting two cities, in the format CITY1 CITY2. Note that if there is a direct route from city1 to city2, then there should also be a direct route from city2 to city1. The edge file only gives the route from city1 to city2, but it should be easy to get the route from city2 to city1. 
+
+</p><p>Your main program will be in a file called <b>Search.java</b>. The names of the .dat files (city.dat and edge.dat) should be hard-coded into your program (not read from the command line). However, your program will accept two command line arguments - an input file and an output file. The input file will consist of two lines: the first line is the name of the start city and the second line is the name of the destination city. The output file will consist of the results from running your program: the path from the start city to the destination city for each of the three search algorithms (breadth-first, depth-first, and A*). A sample input and output file are given in the next section. 
+
+</p><p>After reading city.dat and edge.dat, your program should run each of the three search algorithms. After each run, print the list of cities on the path, the total number of "hops" it took to reach the destination city for that algorithm (a hop is just one edge on the path), and the total distance along the path. 
+
+</p><p>When finding the paths for breadth-first and depth-first search, if there is a choice of cities to go to from any particular city, choose cities in alphabetical order. For A* search, if there is a choice of cities, choose cities according to the heuristic of how far away each city is from the destination city ("as the crow flies" - i.e., Euclidean distance) plus the distance from the start city to the current city under consideration. The LATITUDE and LONGITUDE fields in the city.dat file will be helpful for finding the distance. Note that latitude and longitude can be thought of as Cartesian (x-y) coordinates, where the origin is in the lower right-hand corner, with increasing latitude upward and increasing longitude leftward.
+
+</p><p>To convert from latitude and longitude to distance in miles, use the following formula:
+
+</p><center><code>distance = sqrt( (lat1-lat2)*(lat1-lat2) + (lon1-lon2)*(lon1-lon2) ) * 100 <br>
+
+</code></center>
+
+
+<hr>
+
+<h2>
+  Sample Output
+</h2>
+
+<p>Below is an example of what your output should look like, assuming the start city is Olympia and the destination city is SaltLakeCity. Notice that if the destination city is on the fringe, search will stop before any other cities on the fringe are expanded. Your output should look identical to this output, including spacing. 
+
+</p><pre>Breadth-First Search Results: 
+Olympia
+Boise
+SaltLakeCity
+That took 2 hops to find.
+Total distance = 1264 miles.
+
+
+Depth-First Search Results: 
+Olympia
+Boise
+SaltLakeCity
+That took 2 hops to find.
+Total distance = 1264 miles.
+
+
+A* Search Results: 
+Olympia
+Boise
+SaltLakeCity
+That took 2 hops to find.
+Total distance = 1264 miles.
+
+</pre>
+
+<p>You can check your output for correct formatting by saving this sample input file called "in1", generating your own output file by running your program with this input file, and then running the UNIX <code>diff</code> command to compare your output with the expected output file called "out1":
+
+</p><pre>% java Search in1 output
+% diff -w output out1
+</pre>
+
+If nothing prints to the screen after this command then your output is formatted correctly. You may also test your code on "in2" and "out2", for finding a path between Denver and Boston.
+
+
+<p>Your program will be tested on multiple start and destination cities, not just the samples shown here, so be sure to fully test your program, including all error conditions (given below). Also, your program should be able to accept input from standard input and/or print output to standard output instead of from files. A '-' in the command line will signify standard input and/or standard output. For example, your program should be able to be run as any of the following:
+
+</p><pre>% java Search - output
+% java Search input -
+% java Search - -
+% java Search input output
+</pre>
+
+
+<hr>
+
+<h2>
+  Error Conditions and Messages
+</h2>
+
+<ol>
+<li>Missing one or both command line arguments:</li>
+<ul><li><code>Usage: java Search inputFile outputFile</code></li></ul>
+<li>Cannot read city.dat:</li>
+<ul><li><code>File not found: city.dat</code></li></ul>
+<li>Cannot read edge.dat:</li>
+<ul><li><code>File not found: edge.dat</code></li></ul>
+<li>Cannot read input file:</li>
+<ul><li><code>File not found: (input file name)</code></li></ul>
+<li>Start city and/or destination city not in data file:</li>
+<ul><li><code>No such city: (city)</code></li></ul>
+</ol>
+
+<p>For the last two error messages, the string in parentheses should be replaced with the actual string that the user entered but was not found. Your program should print the error messages to System.err and terminate (System.exit(0)) upon any of these error conditions. No other error conditions will be tested for.
+</p><hr>
+
+<h2>
+  Submission
+</h2>
+
+<p>When you have your program working you can submit your source code to the MyCourses dropbox called <b>Project 1</b> before 11:59pm on the date given at the top of this write-up.
+
+
+</p></body><div class="gr-context gr-dict gr-context-loader gr-dict-freemium" style="display: none;"><span class="gr-triangle"></span><div class="gr-placeholder"></div><a href="http://www.grammarly.com/?utm_source=dict&utm_medium=link&utm_campaign=chrome_plg" target="_blank" class="gr-hint-settings"></a><strong class="gr-title"></strong><div class="gr-dict-content"></div></div></html>
