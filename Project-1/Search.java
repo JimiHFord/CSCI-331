@@ -50,6 +50,7 @@ public class Search {
 		for(SearchResult result : results) {
 			out.println();
 			out.println(result.title);
+			out.print(result.pathToString());
 			out.println("That took " + result.hops() +
 					" hops to find.");
 			out.println("Total distance = " + result.totalDistance() +

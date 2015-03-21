@@ -11,4 +11,10 @@ public class City extends Vertex {
 		this.name = name;
 		this.state = state;
 	}
+	
+	public double distanceTo(City b) {
+		City a = this;
+		return Math.sqrt((a.lat-b.lat)*(a.lat-b.lat)+
+				(a.lon-b.lon)*(a.lon-b.lon))*100;
+	}
 }
