@@ -1,3 +1,11 @@
+//******************************************************************************
+//
+// File:    Search.java
+// Package: ---
+// Unit:    Class Search
+//
+//******************************************************************************
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;

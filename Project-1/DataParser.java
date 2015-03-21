@@ -1,3 +1,11 @@
+//******************************************************************************
+//
+// File:    DataParser.java
+// Package: ---
+// Unit:    Class DataParser
+//
+//******************************************************************************
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
