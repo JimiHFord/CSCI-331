@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 
-
+/**
+ * Data container for search results
+ * @author Jimi Ford
+ *
+ */
 public class SearchResult {
 
 	public final String title;
@@ -8,22 +12,23 @@ public class SearchResult {
 	private double distance;
 	private ArrayList<City> path;
 	
+	/**
+	 * construct a search result
+	 * @param title title of result
+	 * @param path path taken in result
+	 */
 	public SearchResult(String title, ArrayList<City> path) {
 		this.title = title;
-		this.path = path == null? new ArrayList<City>() :
-			reverse(path);
+		this.path = path;
 		this.hops = this.path.size() - 1;
 		this.distance = calcDistance(this.path);
 	}
+
 	
-	private ArrayList<City> reverse(ArrayList<City> path) {
-		ArrayList<City> result = new ArrayList<City>(path.size());
-		for(int i = path.size() - 1; i >= 0; i--) {
-			result.add(path.get(i));
-		}
-		return result;
-	}
-	
+	/**
+	 * string representation of path taken
+	 * @return string representation of path taken
+	 */
 	public String pathToString() {
 		StringBuilder builder = new StringBuilder();
 		for(City city : path) {
@@ -32,6 +37,11 @@ public class SearchResult {
 		return builder.toString();
 	}
 	
+	/**
+	 * calculate total distance of path
+	 * @param path path to calculate
+	 * @return total distance
+	 */
 	private double calcDistance(ArrayList<City> path) {
 		double distance = 0;
 		City a, b;
@@ -43,10 +53,18 @@ public class SearchResult {
 		return distance;
 	}
 	
+	/**
+	 * how many hops in the path
+	 * @return number of hops
+	 */
 	public int hops() {
 		return hops;
 	}
 	
+	/**
+	 * get rounded distance for this path
+	 * @return
+	 */
 	public int totalDistance() {
 		return (int) Math.round(distance);
 	}

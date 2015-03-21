@@ -23,9 +23,6 @@ public class UndirectedEdge {
 	// private data members
 	private City a, b;
 	
-
-	
-	
 	/**
 	 * Construct an undirected edge
 	 * @param id a unique identifier to distinguish between other edges
