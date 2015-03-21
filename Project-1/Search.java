@@ -7,14 +7,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+/**
+ * main program
+ * Usage: java Search inputFile outputFile
+ * or
+ * Usage: java Search - -
+ * using "-" for console input
+ * @author Jimi Ford
+ *
+ */
 public class Search {
 
-	public static final int IN_INDEX = 0;
-	public static final int OUT_INDEX = 1;
-	public static final String EDGE_DATA = "edge.dat";
-	public static final String CITY_DATA = "city.dat";
+	private static final int IN_INDEX = 0;
+	private static final int OUT_INDEX = 1;
+	private static final String EDGE_DATA = "edge.dat";
+	private static final String CITY_DATA = "city.dat";
 	
-	
+	/**
+	 * main method
+	 * @param args [0] = input file, [1] = output file
+	 */
 	public static void main(String[] args) {
 		if(args.length < 2) {
 			error("Usage: java Search inputFile outputFile");
@@ -63,6 +75,9 @@ public class Search {
 		out.close();
 	}
 	
+	/*
+	 * private helper function
+	 */
 	private static InputStream is(String option) {
 		if(option.equals("-")) {
 			return System.in;
@@ -76,6 +91,9 @@ public class Search {
 		return null;
 	}
 	
+	/*
+	 * private helper function
+	 */
 	private static PrintStream os(String option) {
 		if(option.equals("-")) {
 			return new PrintStream(System.out);
@@ -90,6 +108,9 @@ public class Search {
 		return null;
 	}
 	
+	/*
+	 * private helper function
+	 */
 	private static ArrayList<City> cities(String cityDat) {
 		try {
 			return DataParser.getCities(cityDat);
@@ -99,6 +120,9 @@ public class Search {
 		return null;
 	}
 	
+	/*
+	 * private helper function
+	 */
 	private static ArrayList<UndirectedEdge> edges(String edgeDat, ArrayList<City> cities) {
 		try {
 			return DataParser.getSetEdges(EDGE_DATA, cities);
@@ -108,6 +132,9 @@ public class Search {
 		return null;
 	}
 	
+	/*
+	 * private helper function
+	 */
 	private static void error(String msg) {
 		System.err.println(msg);
 		System.exit(0);

@@ -6,9 +6,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
+/**
+ * handles all data parsing
+ * @author Jimi Ford
+ *
+ */
 public class DataParser {
 
+	/**
+	 * parse cities
+	 * @param cityDat filename of city data
+	 * @return parsed cities
+	 * @throws IOException if problem reading file
+	 */
 	public static ArrayList<City> getCities(String cityDat) 
 			throws IOException {
 		List<String> lines = Files.readAllLines(Paths.get(cityDat), 
@@ -31,6 +41,13 @@ public class DataParser {
 		return result;
 	}
 	
+	/**
+	 * parse edges and set relationships between cities
+	 * @param edgeDat filename of edge data
+	 * @param cities previously parsed cities to set relationships on
+	 * @return parsed edges
+	 * @throws IOException if problem reading file
+ 	 */
 	public static ArrayList<UndirectedEdge> getSetEdges(String edgeDat, ArrayList<City> cities) 
 			throws IOException {
 		

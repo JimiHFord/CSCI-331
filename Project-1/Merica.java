@@ -7,12 +7,10 @@
 //******************************************************************************
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.Stack;
 
 
 /**
@@ -21,7 +19,7 @@ import java.util.Stack;
  * that same edge connects vertex B to vertex A.
  * 
  * @author Jimi Ford
- * @version 2-15-2015
+ * @version 3-15-2015
  */
 public class Merica {
 
@@ -31,12 +29,22 @@ public class Merica {
 	
 		
 
+	/**
+	 * construct Merica
+	 * @param cities list of cities
+	 * @param edges list of connections between cities
+	 */
 	public Merica(ArrayList<City> cities, ArrayList<UndirectedEdge> edges) {
 		this.cities = cities;
 		this.edges = edges;
 		this.v = cities.size();
 	}
 	
+	/**
+	 * verify the city exists
+	 * @param city the city to verify
+	 * @return true if verified
+	 */
 	public boolean verifyCity(String city) {
 		boolean retval = false;
 		for(int i = 0; i < cities.size() && !retval; i++) {
@@ -45,6 +53,11 @@ public class Merica {
 		return retval;
 	}
 	
+	/**
+	 * get city object 
+	 * @param city
+	 * @return
+	 */
 	public City getCity(String city) {
 		City retval = null;
 		for(int i = 0; i < cities.size() && retval == null; i++) {
@@ -55,74 +68,48 @@ public class Merica {
 		return retval;
 	}
 	
+	/**
+	 * breadth first traversal
+	 * @param start
+	 * @param goal
+	 * @return bfs path
+	 */
 	public SearchResult bfs(City start, City goal) {
 		ArrayList<City> path = bfsPath(start,goal);
 		return new SearchResult("Breadth-First Search Results: ", path);
 	}
 	
+	/**
+	 * depth first traversal
+	 * @param start
+	 * @param goal
+	 * @return dfs path
+	 */
 	public SearchResult dfs(City start, City goal) {
 		ArrayList<City> path = dfsPath(start,goal);
 		return new SearchResult("Depth-First Search Results: ", path);
 	}
 	
+	/**
+	 * a* path
+	 * @param start
+	 * @param goal
+	 * @return a* path
+	 */
 	public SearchResult aStar(City start, City goal) {
 		ArrayList<City> path = astarPath(start, goal);
 		return new SearchResult("A* Search Results: ", path);
 	}
 	
 	/**
-	 * Perform a BFS to get the distance from one vertex to another
-	 * 
-	 * @param start the id of the start vertex
-	 * @param goal the id of the goal vertex
-	 * @return the minimum distance between the two vertices
+	 * a* path
+	 * @param start
+	 * @param goal
+	 * @return a* path
 	 */
-	private int BFS(int start, int goal) {
-		return BFS(cities.get(start), cities.get(goal));
-	}
-	
-	/**
-	 * Perform a BFS to get the distance from one vertex to another
-	 *  
-	 * @param start the reference to the start vertex
-	 * @param goal the reference to the goal vertex
-	 * @return the minimum distance between the two vertices
-	 */
-	private int BFS(City start, City goal) {
-		int distance = 0, verticesToProcess = 1, uniqueNeighbors = 0;
-		LinkedList<City> queue = new LinkedList<City>();
-		boolean[] visited = new boolean[v];
-		visited[start.n] = true;
-		City current, t2;
-		queue.add(start);
-		while(!queue.isEmpty()) {
-			current = queue.removeFirst();
-			if(current.equals(goal)) {
-				return distance;
-			}
-			for(int i = 0; i < current.edgeCount(); i++) {
-				t2 = current.getEdges().get(i).other(current);
-				if(!visited[t2.n]) {
-					visited[t2.n] = true;
-					queue.add(t2);
-					uniqueNeighbors++;
-				}
-			}
-			verticesToProcess--;
-			if(verticesToProcess <= 0) {
-				verticesToProcess = uniqueNeighbors;
-				uniqueNeighbors = 0;
-				distance++;
-			}
-			
-		}
-		return 0;
-	}
-	
 	private ArrayList<City> astarPath(City start, City goal) {
 		PriorityQueue<Node> pq = new PriorityQueue<Node>(10, new FNodeComparator());
 		LinkedList<Node> closed = new LinkedList<Node>();
-		ArrayList<Node> children;
 		Node X = new Node(start);
 		Node next;
 		UndirectedEdge edge;
@@ -150,51 +137,15 @@ public class Merica {
 		}
 		ArrayList<City> result = new ArrayList<City>();
 		while(!X.isRoot()) {
-			result.add(X.payload);
+			result.add(0,X.payload);
 			X = X.parent;
 		}
-		result.add(X.payload);
+		result.add(0, X.payload);
 		return result;
 	}
+
 	
-//	private ArrayList<City> bfsPath(City start, City goal) {
-//		LinkedList<Node<City>> open = new LinkedList<Node<City>>();
-//		LinkedList<Node<City>> closed = new LinkedList<Node<City>>();
-//		ArrayList<City> children;
-//		Node<City> X = new Node<City>(start);
-//		City c = null, it;
-//		open.add(X);
-//		boolean found = false;
-//		while(!open.isEmpty() && !found) {
-//			X = open.remove();
-//			c = X.payload;
-//			if(c.equals(goal)) {
-//				found = true;
-//				break;
-//			}
-//			children = new ArrayList<City>(X.payload.edgeCount());
-//			
-//			for(int i = 0; i < c.edgeCount(); i++) {
-//				it = c.getEdges().get(i).other(c);
-//				if(it.equals(goal)) {
-//					X = new Node<City>(X, it);
-//					found = true;
-//					break;
-//				} else {
-//					children.add(it);
-//				}
-//			}
-//		}
-//		return new ArrayList<City>();
-//	}
 	
-	/**
-	 * Perform a BFS to get the distance from one vertex to another
-	 *  
-	 * @param start the reference to the start vertex
-	 * @param goal the reference to the goal vertex
-	 * @return the minimum distance between the two vertices
-	 */
 	private ArrayList<City> bfsPath(City start, City goal) {
 		int distance = 0, verticesToProcess = 1, uniqueNeighbors = 0;
 		LinkedList<Node> queue = new LinkedList<Node>();
@@ -238,10 +189,10 @@ public class Merica {
 		}
 		ArrayList<City> result = new ArrayList<City>(distance);
 		while(!node.isRoot()) {
-			result.add(node.payload);
+			result.add(0,node.payload);
 			node = node.parent;
 		}
-		result.add(node.payload);
+		result.add(0, node.payload);
 		return result;
 	}
 
@@ -308,14 +259,19 @@ public class Merica {
 		}
 		ArrayList<City> result = new ArrayList<City>();
 		while(!X.isRoot()) {
-			result.add(X.payload);
+			result.add(0,X.payload);
 			X = X.parent;
 		}
-		result.add(X.payload);
+		result.add(0,X.payload);
 		return result;
 
 	}
 	
+	/**
+	 * private internal class used for traversals
+	 * @author jimiford
+	 *
+	 */
 	private class Node {
 		public final Node parent;
 		public final City payload;
@@ -348,7 +304,11 @@ public class Merica {
 		}
 	}
 
-	
+	/**
+	 * sort cities in reverse order
+	 * @author jimiford
+	 *
+	 */
 	private class ReverseAlphabetCityComparator implements Comparator<City> {
 		@Override
 		public int compare(City o1, City o2) {
@@ -356,6 +316,11 @@ public class Merica {
 		}
 	}
 	
+	/**
+	 * sort nodes by their heuristic function
+	 * @author jimiford
+	 *
+	 */
 	private class FNodeComparator implements Comparator<Node> {
 		@Override
 		public int compare(Node o1, Node o2) {
@@ -370,6 +335,11 @@ public class Merica {
 		
 	}
 	
+	/**
+	 * sort nodes by their cities name
+	 * @author jimiford
+	 *
+	 */
 	private class AlphabetNodeComparator implements Comparator<Node> {
 		@Override
 		public int compare(Node o1, Node o2) {

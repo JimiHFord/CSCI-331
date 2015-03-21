@@ -1,0 +1,58 @@
+CSCI-331 -- Intro to Intelligent Systems
+Project 1 Tentative Submission Gradesheet 
+
+UserId: _______________
+
+
+Functionality (92 points maximum)
+
+  1. Output format is correct (3 pts)                              __________
+
+  2. Program accepts input from a file (2 pts)                     __________
+
+  3. Program sends output to a file (2 pts)                        __________
+
+  4. Program optionally accepts input from stdin (2 pts)           __________
+ 
+  5. Program optionally sends output to stdout (2 pts)             __________
+
+  6. Breadth-first search gives correct list of cities (9 pts)     __________
+
+  7. Number of hops is correct for breadth-first search (9 pts)    __________
+
+  8. Total distance is correct for breadth-first search (9 pts)    __________
+
+  9. Depth-first search gives correct list of cities (9 pts)       __________
+
+ 10. Number of hops is correct for depth-first search (9 pts)      __________
+
+ 11. Total distance is correct for depth-first search (9 pts)      __________
+  
+ 12. A* search gives correct list of cities (9 pts)                __________
+
+ 13. Number of hops is correct for A* search (9 pts)               __________
+
+ 14. Total distance is correct for A* search (9 pts)               __________
+
+  
+Error Messages (8 points maximum)
+  
+  1. Missing one or both command line arguments (2 pts)            __________
+
+  2. Cannot read city.dat (2 pts)                                  __________
+
+  3. Cannot read edge.dat (2 pts)                                  __________ 
+
+  4. Start city and/or destination city not in data file (2 pts)   __________
+
+NOTE: Error messages should be sent to stderr
+
+Algorithm implementation deductions (up to 5 points deducted):     __________
+        Comments:
+
+
+Code Style deductions (up to 5 points deducted):                   __________
+        Comments:
+
+
+Total points for project project 1 submission (100 points maximum) __________
