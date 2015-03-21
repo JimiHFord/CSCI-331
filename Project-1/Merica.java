@@ -177,45 +177,115 @@ public class Merica {
 	}
 
 	private ArrayList<City> dfsPath(City start, City goal) {
-		Stack<Node<City>> stack = new Stack<Node<City>>();
-		boolean[] visited = new boolean[v];
-		City current;
-		Node<City> node = null, next = null;
-		Node<City> startNode = new Node<City>(start);
-		startNode.g = 0;
-		startNode.h = start.distanceTo(goal);
-		stack.push(startNode);
-		while(!stack.isEmpty()) {
-			node = stack.pop();
-			current = node.payload;
-			if(current.equals(goal)) {
+		ArrayList<Node<City>> open = new ArrayList<Node<City>>();
+		ArrayList<Node<City>> closed = new ArrayList<Node<City>>();
+		ArrayList<City> children;
+		City c, it;
+		Node<City> t1, t2, X = null;
+		t1 = new Node<City>(start);
+		open.add(t1);
+		boolean found = false;
+		while(!open.isEmpty() && !found) {
+			X = open.remove(0);
+			c = X.payload;
+			if(c.equals(goal)) {
+				found = true;
 				break;
-			}
-			if(!visited[current.n]) {
-				visited[current.n] = true;
-				ArrayList<Node<City>> temp = new ArrayList<Node<City>>(current.edgeCount());
-				for(int i = 0; i < current.edgeCount(); i++) {
-					next = new Node<City>(node, 
-							current.getEdges().get(i).other(current));
-					next.g = node.g + node.payload.distanceTo(next.payload);
-					next.h = next.payload.distanceTo(goal);
-					temp.add(next);
-					if(next.payload.equals(goal)) break;
+			} else {
+				children = new ArrayList<City>(X.payload.edgeCount());
+				
+				for(int i = 0; i < c.edgeCount(); i++) {
+					it = c.getEdges().get(i).other(c);
+					if(it.equals(goal)) {
+						X = new Node<City>(X, it);
+						found = true;
+						break;
+					} else {
+						children.add(it);
+					}
 				}
-				Collections.sort(temp, new AlphabetNodeComparator());
-				for(int i = temp.size() -1; i >= 0; i--) {
-					stack.push(temp.get(i));
+				if(!found) {
+					closed.add(X);
+				}
+				for(int discard = 0; discard < children.size(); ) {
+					City current = children.get(discard);
+					boolean increment = true;
+					for(Node<City> each : open) {
+						if(each.payload.equals(current)) {
+							children.remove(discard);
+							increment = false;
+							break;
+						}
+					}
+					if(increment) {
+						for(Node<City> each: closed) {
+							if(each.payload.equals(current)) {
+								children.remove(discard);
+								increment = false;
+								break;
+							}
+						}
+						if(increment) {
+							discard++;
+						}
+					}
+					
+				}
+				Collections.sort(children, new ReverseAlphabetCityComparator());
+				for(City each : children) {
+					open.add(0, new Node<City>(X, each));
 				}
 			}
 		}
 		ArrayList<City> result = new ArrayList<City>();
-		while(!node.isRoot()) {
-			result.add(node.payload);
-			node = node.parent;
+		while(!X.isRoot()) {
+			result.add(X.payload);
+			X = X.parent;
 		}
-		result.add(node.payload);
+		result.add(X.payload);
 		return result;
+
 	}
+//	private ArrayList<City> dfsPath(City start, City goal) {
+//		Stack<Node<City>> stack = new Stack<Node<City>>();
+//		boolean[] visited = new boolean[v];
+//		City current;
+//		Node<City> node = null, next = null;
+//		Node<City> startNode = new Node<City>(start);
+//		startNode.g = 0;
+//		startNode.h = start.distanceTo(goal);
+//		stack.push(startNode);
+//		while(!stack.isEmpty()) {
+//			node = stack.pop();
+//			current = node.payload;
+//			if(current.equals(goal)) {
+//				break;
+//			}
+//			if(!visited[current.n]) {
+//				visited[current.n] = true;
+//				ArrayList<Node<City>> temp = new ArrayList<Node<City>>(current.edgeCount());
+//				for(int i = 0; i < current.edgeCount(); i++) {
+//					next = new Node<City>(node, 
+//							current.getEdges().get(i).other(current));
+//					next.g = node.g + node.payload.distanceTo(next.payload);
+//					next.h = next.payload.distanceTo(goal);
+//					temp.add(next);
+//					if(next.payload.equals(goal)) break;
+//				}
+//				Collections.sort(temp, new AlphabetNodeComparator());
+//				for(int i = temp.size() -1; i >= 0; i--) {
+//					stack.push(temp.get(i));
+//				}
+//			}
+//		}
+//		ArrayList<City> result = new ArrayList<City>();
+//		while(!node.isRoot()) {
+//			result.add(node.payload);
+//			node = node.parent;
+//		}
+//		result.add(node.payload);
+//		return result;
+//	}
 	
 	private class Node<E> {
 		public final Node<E> parent;
@@ -233,12 +303,32 @@ public class Merica {
 			this.payload = payload;
 		}
 		
+//		public boolean equals(Object o) {
+//			if(o == this) return true;
+//			if(!(o instanceof Node<?>)) return false;
+//			Node<E>
+//		}
+		
 		private boolean isRoot() {
 			return parent == null;
 		}
 		
 		public double f() {
 			return g + h;
+		}
+	}
+	
+	private class AlphabetCityComparator implements Comparator<City> {
+		@Override
+		public int compare(City o1, City o2) {
+			return o1.name.compareTo(o2.name);
+		}
+	}
+	
+	private class ReverseAlphabetCityComparator implements Comparator<City> {
+		@Override
+		public int compare(City o1, City o2) {
+			return o2.name.compareTo(o1.name);
 		}
 	}
 	
