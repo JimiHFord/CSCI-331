@@ -1,0 +1,39 @@
+CSCI-331 Introduction to Intelligent Systems
+
+Project 2 Submission Gradesheet 
+
+UserId: _______________
+
+
+Implementation:
+
+  1. findSquareRandDir() is implemented correctly (25 points)        __________
+
+  2. findSquareSmart() is implemented correctly (25 points)          __________
+
+  3. moveSmart() is implemented correctly (25 points)                __________
+
+  4. prove() is implemented correctly (25 points)                    __________
+
+
+Functionality Deductions:   
+          
+  1. 1 point deducted for every game lost by Miss Scarlet out of 100 __________
+(agent can lose up to 5 times without a deduction, after that deuce 1 point for each loss). 
+
+  2. Deduction for any player not abiding by the rules               __________
+
+  3. Program does not run in a reasonable amount of time
+
+       100 games <= 15 seconds                  :  0 points deducted
+       100 games >  15 seconds and <= 30 seconds: 10 points deducted
+       100 games >  30 seconds and <= 1  minute:  20 points deducted 
+       100 games > 1 minute: ALL points deducted                     __________
+  
+
+Code Style Deductions (up to 5 points deducted):                     __________
+
+       Comments:
+
+
+Total points for project 2 submission (100 points maximum)           __________
