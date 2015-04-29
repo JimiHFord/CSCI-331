@@ -18,6 +18,12 @@ public class CluePlayer {
 	private boolean inRoom = false;
 	private Square door = null;
 
+	private static final int 
+	UP = 0,
+	DOWN = 1,
+	RIGHT = 2,
+	LEFT = 3;
+
 	/**
 	 *  Find a random square on the board for a player to move to.
 	 *
@@ -49,6 +55,14 @@ public class CluePlayer {
 			array[i] = a;
 		}
 	}
+	
+	private boolean isRoom(int row, int col) {
+		try {
+			return !Clue.board.getRoom(row, col).trim().equals("");
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return false;
+		}
+	}
 
 	/**
 	 *  Find a square on the board for a player to move to by rolling the 
@@ -63,44 +77,75 @@ public class CluePlayer {
 	 * @throws Exception 
 	 */
 	public Square findSquareRandDir(final int c_row, final int c_col) {
-		int[] dirArr = new int[] { 0, 1, 2, 3 };
+		int[] dirArr = new int[] { UP, RIGHT, DOWN, LEFT };
 		shuffleArray(dirArr);
-		double ran_dir;
 		boolean validRoll = false;
-		boolean leavingRoom = false;
-		boolean stopForDoor = false;
+		boolean leavingRoom;
 		boolean validDirection;
-		//		boolean keepRolling = true;
-		//		int col = 0, row = 0;
 		int col = 0, row = 0;
+		inRoom = isRoom(c_row, c_col);
 		while(!validRoll) {
 			// if they're in a room
 			if(inRoom) {
+
+				// they are currently either on a door or not
 				col = c_col;
 				row = c_row;
-				validRoll = true;
-				for(int i = 0; i < dirArr.length; i++) {
+				final boolean onDoor = Clue.board.isDoor(c_row, c_col);
+				
+				// loop over direction options
+				for(int i = 0; i < dirArr.length && !validRoll; i++) {
+					// pick a direction
 					int direction = dirArr[i];
 					col = c_col;
 					row = c_row;
-					validDirection = true;
+					if(direction == UP) { // up
+						validDirection = inBounds(row - Clue.die, col);
+						leavingRoom = !isRoom(row - Clue.die, col);
+					} else if(direction == RIGHT) { // right
+						validDirection = inBounds(row, col + Clue.die);
+						leavingRoom = !isRoom(row, col + Clue.die);
+					} else if(direction == DOWN) { // down
+						validDirection = inBounds(row + Clue.die, col);
+						leavingRoom = !isRoom(row + Clue.die, col);
+					} else { // left
+						validDirection = inBounds(row, col - Clue.die);
+						leavingRoom = !isRoom(row, col - Clue.die);
+					}
+					// if they're on a door and they're leaving,
+					// the next square better not be in a room
+					if(validDirection && onDoor && leavingRoom) {
+						if(direction == UP) {
+							validDirection = !isRoom(row - 1, col);
+						} else if(direction == RIGHT) {
+							validDirection = !isRoom(row, col + 1);
+						} else if(direction == DOWN) {
+							validDirection = !isRoom(row + 1, col);
+						} else {
+							validDirection = !isRoom(row, col - 1);
+						}
+					} 
+					// check every position along the way to make sure this is a valid
+					// direction to travel in given the number of steps 
 					for(int dir = 0; dir < Clue.die && validDirection; dir++) {
-						if(direction == 0) { // up
+						if(direction == UP) { // up
 							row--;
-						} else if(direction == 1) { // right
+						} else if(direction == RIGHT) { // right
 							col++;
-						} else if(direction == 2) { // down
+						} else if(direction == DOWN) { // down
 							row++;
 						} else { // left
 							col--;
 						}
 						if(inBounds(row, col)) {
 							if(Clue.board.isDoor(row, col)) {
-								if(door.getRow() == row && door.getColumn() == col) {
-									leavingRoom = true;
+								// ensure they are leaving the same door
+								if(leavingRoom) {
+									if(door.getRow() != row || door.getColumn() != col) {
+										validDirection = false;
+									}
 								}
-								break;
-							} else if(Clue.board.getRoom(row, col).trim().equals("")) {
+							} else if(isRoom(row, col)) {
 								validDirection = false;
 							}
 						} else {
@@ -109,10 +154,8 @@ public class CluePlayer {
 					}
 					if (inBounds(row, col) && validDirection) {
 						validRoll = true;
-						break;
 					}
 				}
-
 			} else { // they are not in a room
 				// for each direction that they could move
 				// test which one works
@@ -120,14 +163,15 @@ public class CluePlayer {
 					int direction = dirArr[i];
 					col = c_col;
 					row = c_row;
+
 					validDirection = true;
 					for(int die = 0; die < Clue.die && 
 							validDirection && !validRoll; die++) {
-						if(direction == 0) { // up
+						if(direction == UP) { // up
 							row--;
-						} else if(direction == 1) { // right
+						} else if(direction == RIGHT) { // right
 							col++;
-						} else if(direction == 2) { // down
+						} else if(direction == DOWN) { // down
 							row++;
 						} else { // left
 							col--;
@@ -135,10 +179,9 @@ public class CluePlayer {
 						if(inBounds(row, col)) {
 							if(Clue.board.isDoor(row, col)) {
 								door = new Square(row,col);
-								inRoom = true;
 								validRoll = true;
-//								break;
-							} else if(!Clue.board.getRoom(row, col).trim().equals("")) {
+								//								break;
+							} else if(isRoom(row, col)) {
 								validDirection = false;
 							}
 						} else {
@@ -147,20 +190,16 @@ public class CluePlayer {
 					} // check direction
 					if (inBounds(row, col) && validDirection) {
 						validRoll = true;
-//						break;
+						//						break;
 					}
 				}
 			}
 			if(!validRoll) {
 				roll();
-				leavingRoom = false;
 			}
 		}
-		if(leavingRoom) {
-			inRoom = false;
-		}
 		if(!inBounds(row,col)) {
-			System.err.println(row + ", " + col);
+			System.err.println("ERROR DETECTED:\t"+row + ", " + col);
 		}
 		return new Square(row, col);
 	}
@@ -188,7 +227,7 @@ public class CluePlayer {
 	 */
 	public Square findSquareSmart(int c_row, int c_col, DetectiveNotes notes) {
 
-		return findSquareRand();
+		return findSquareRandDir(c_row, c_col);
 	}
 
 	/**
@@ -262,9 +301,38 @@ public class CluePlayer {
 	public String[] moveSmart(int curr_row, int curr_column, 
 			int row, int column, String color, String name, 
 			DetectiveNotes notes) {
+		String [] retVal = new String[4];
+		String suspect = notes.getRandomSuspect();
+		String weapon = notes.getRandomWeapon();
+		String room = null;
+		try {
+			room = Clue.board.getRoom(row,column);
+		} catch(ArrayIndexOutOfBoundsException e) {
+			room = "";
+		}
 
+		if (Clue.board.isDoor(curr_row,curr_column))
+			Clue.board.setColor(curr_row,curr_column,"Gray");
+		else 
+			Clue.board.setColor(curr_row, curr_column, "None");
 
-		return moveNaive(curr_row,curr_column,row,column,color,name,notes);
+		if (Clue.board.isDoor(row,column)) { 
+			retVal[0] = name;
+			retVal[1] = room;
+			retVal[2] = suspect;
+			retVal[3] = weapon;
+
+			if (Clue.gui) {
+				System.out.print(name+" suggests that the crime was committed");
+				System.out.println(" in the " + room + " by " + suspect +
+						" with the " + weapon);
+			}
+		}
+		else retVal = null;
+
+		Clue.board.setColor(row,column,color);
+
+		return retVal;
 	}
 
 	/**
