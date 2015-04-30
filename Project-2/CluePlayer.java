@@ -4,6 +4,7 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /** 
@@ -17,7 +18,32 @@ public class CluePlayer {
 
 	private boolean inRoom = false;
 	private Square door = null;
-
+	private Square target = null;
+	private boolean onTheHunt = false;
+	
+	public static final String
+		KITCHEN = "Kitchen",
+		BALL_ROOM = "Ball Room",
+		CONSERVATORY = "Conservatory",
+		DINING_ROOM = "Dining Room",
+		BILLIARD_ROOM = "Billiard Room",
+		LOUNGE = "Lounge",
+		HALL = "Hall",
+		LIBRARY = "Library",
+		STUDY = "Study";
+	
+	private static final String[] rooms = {
+		KITCHEN,
+		BALL_ROOM,
+		CONSERVATORY,
+		DINING_ROOM,
+		BILLIARD_ROOM,
+		LOUNGE,
+		HALL,
+		LIBRARY,
+		STUDY
+	};
+	
 	private static final int 
 	UP = 0,
 	DOWN = 1,
@@ -213,9 +239,28 @@ public class CluePlayer {
 				row >= 2 && row < Clue.board.HEIGHT);
 	}
 
+	private boolean contains(String[] src, String target) {
+		for(String s : src) {
+			if(s.equals(target)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private List<String> filter(List<String> source, String[] by) {
+		List<String> retVal = new ArrayList<String>();
+		for(String s : source) {
+			if(!contains(by,s)) {
+				retVal.add(s);
+			}
+		}
+		return retVal;
+	}
+	
 	/**
 	 *  Find a square on the board for a player to move to by rolling the 
-	 *  die and chosing a good direction. The square that is chosen must
+	 *  die and choosing a good direction. The square that is chosen must
 	 *  be legally accessible to the player (i.e., the player must adhere to 
 	 *  the rules of the game to be there).
 	 *
@@ -226,7 +271,18 @@ public class CluePlayer {
 	 *  @return                  The square that this player ends up on
 	 */
 	public Square findSquareSmart(int c_row, int c_col, DetectiveNotes notes) {
-
+		boolean inRoom = isRoom(c_row, c_col);
+		List<String> rooms = notes.getMyRooms();
+		// 1. 
+		int stepsLeft = Clue.die;
+		if(!onTheHunt) { // if not already looking for room, find closest
+			
+		}
+		if(inRoom) {
+			// find direction to make first step
+		} else {
+			
+		}
 		return findSquareRandDir(c_row, c_col);
 	}
 
@@ -335,6 +391,15 @@ public class CluePlayer {
 		return retVal;
 	}
 
+	private int contains(String target, String[] source) {
+		for(int i = 0; i < source.length; i++) {
+			if(source[i].equals(target)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 	/**
 	 *  Try to prove a suggestion is false by asking the players, in a
 	 *  round-robin fashion, to show the suggester one of the suggestions if
@@ -359,8 +424,32 @@ public class CluePlayer {
 
 		// Ask the other 5 players to show one of the suggested cards
 		// YOUR CODE GOES HERE
-
-
+		List<Object> cards;
+		for(int other = 0; other < 6; other++) {
+			if(other != player) {
+				cards = Arrays.asList((Clue.allCards.get(other)).keySet().toArray());
+				for(int i = 0; i < cards.size(); i++) {
+					card = (String)cards.get(i);
+					int contains = contains(card, suggestion);
+					if(contains >= 0) {
+						found = true;
+						if(contains == 0) { // name
+							// don't know what to do
+						} else if(contains == 1) { // room
+							notes.addRoom(card);
+						} else if(contains == 2) { // suspect
+							notes.addSuspect(card);
+						} else if(contains == 3) { // weapon
+							notes.addWeapon(card);
+						}
+					}
+				}
+				
+			}
+		}
+		
+		 
+		
 		// Make an accusation
 		if (!found) {
 			// Check this player's cards to see if this player has them
@@ -383,6 +472,8 @@ public class CluePlayer {
 
 		return accusation;
 	}
+	
+	
 
 	/**
 	 *  Update this player's detective notes upon learning some information.
@@ -400,5 +491,13 @@ public class CluePlayer {
 			notes.addWeapon(card);
 		else if (type.equals("room"))
 			notes.addRoom(card);
+	}
+	
+	private class Room {
+		public final String name;
+		public Room(String name) {
+			this.name = name;
+		}
+		
 	}
 }
