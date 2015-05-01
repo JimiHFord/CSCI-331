@@ -36,6 +36,31 @@ public class CluePlayer {
 		LIBRARY = "Library",
 		STUDY = "Study";
 	
+	public static final String
+		MUSTARD = "Mustard",
+		WHITE = "White",
+		GREEN = "Green",
+		PEACOCK = "Peacock",
+		SCARLET = "Scarlet",
+		PLUM = "Plum";
+		
+	public static final String
+		WRENCH = "Wrench",
+		CANDLESTICK = "Candlestick",
+		PIPE = "Pipe",
+		ROPE = "Rope",
+		REVOLVER = "Revolver",
+		KNIFE = "Knife";
+	
+	private static final String[] weapons = {
+		WRENCH,
+		CANDLESTICK,
+		PIPE,
+		ROPE,
+		REVOLVER,
+		KNIFE
+	};
+	
 	private static final String[] rooms = {
 		KITCHEN,
 		BALL_ROOM,
@@ -46,6 +71,15 @@ public class CluePlayer {
 		HALL,
 		LIBRARY,
 		STUDY
+	};
+	
+	private static final String[] suspects = {
+		MUSTARD,
+		PLUM,
+		PEACOCK,
+		SCARLET,
+		WHITE,
+		GREEN
 	};
 	
 	private PriorityQueue<TargetDoor> queue = null;
@@ -273,6 +307,16 @@ public class CluePlayer {
 		return retVal;
 	}
 	
+	private List<String> filter(String[] source, List<String> by) {
+		List<String> newSource = Arrays.asList(source);
+		String[] newBy = new String[by.size()];
+		int index = 0;
+		for(String s : by) {
+			newBy[index++] = s;
+		}
+		return filter(newSource, newBy);
+	}
+	
 	private boolean onTheHunt(DetectiveNotes notes) {
 		if(target == null) {
 			return false;
@@ -302,11 +346,6 @@ public class CluePlayer {
 		current_col = c_col;
 		if(queue == null) initQueue();
 		
-		
-		
-		List<String> rooms = notes.getMyRooms();
-		// 1. 
-		
 		if(!queue.isEmpty()) {
 			if(!onTheHunt(notes)) { 
 				// if not already looking for room, find closest
@@ -334,18 +373,36 @@ public class CluePlayer {
 	 * @return a* path
 	 */
 	private List<PathSquare> astarPath(PathSquare start) {
-		PriorityQueue<Node> pq = new PriorityQueue<Node>(10, new NodeComparator());
+		PriorityQueue<Node> pq = new PriorityQueue<Node>(20, new NodeComparator());
 		LinkedList<Node> closed = new LinkedList<Node>();
 		Node X = new Node(start);
 		TargetDoor goal = start.goal;
+		boolean found = false;
+		if(start.equals(goal)) {
+//			System.out.println("STARTING ON GOAL");
+			found = true;
+		}
 		Node next;
 		UndirectedEdge edge;
 		PathSquare current, t1;
 		pq.add(X);
-		boolean found = false;
+		int count = 0;
 		while(!pq.isEmpty() && !found) {
+//			if((++count)%10 == 0) {
+//				System.out.println(count);
+//				if(count > 9) {
+//					System.out.println("WARNING " + pq.size());
+//					System.out.println("Start: " + "("+start.row+", "+start.col+")\t"
+//							+ "Goal: " +"("+goal.row+", "+goal.col+")");
+//				}
+//			}
+//			System.out.println("WARNING " + pq.size());
+//			System.out.println("Start: " + "("+start.row+", "+start.col+")\t"
+//					+ "Goal: " +"("+goal.row+", "+goal.col+")");
 			X = pq.remove();
+			closed.add(X);
 			current = X.payload;
+//			System.out.println("Current: (" + current.row+", "+current.col+")");
 			if(X.payload.equals(goal)) {
 				found = true;
 				break;
@@ -374,13 +431,11 @@ public class CluePlayer {
 	}
 	
 	private Square pathToDoor() {
-		boolean inRoom = isRoom(current_row, current_col);
-		int[] dirArr = new int[] { UP, RIGHT, DOWN, LEFT };
+		if(target == null) System.out.println("ERROR NULL");
 		PathSquare start = new PathSquare(current_row, current_col, target);
 		List<PathSquare> path = astarPath(start);
-		Square retval;
 		PathSquare p;
-		if(path.size() == 1) {
+		if(path.size() <= 1) {
 			return findSquareRandDir(current_row, current_col);
 		}
 		if(Clue.die >= path.size()) {
@@ -388,7 +443,7 @@ public class CluePlayer {
 		} else {
 			p = path.get(Clue.die);
 		}
-		return retval = new Square(p.row, p.col);
+		return new Square(p.row, p.col);
 	}
 	
 	/**
@@ -463,8 +518,8 @@ public class CluePlayer {
 			int row, int column, String color, String name, 
 			DetectiveNotes notes) {
 		String [] retVal = new String[4];
-		String suspect = notes.getRandomSuspect();
-		String weapon = notes.getRandomWeapon();
+		String suspect = filter(suspects, notes.getMySuspects()).get(0);
+		String weapon = filter(weapons, notes.getMyWeapons()).get(0);
 		String room = null;
 		try {
 			room = Clue.board.getRoom(row,column);
@@ -497,7 +552,11 @@ public class CluePlayer {
 	}
 
 	private int contains(String target, String[] source) {
-		for(int i = 0; i < source.length; i++) {
+		return contains(target, source, 0);
+	}
+	
+	private int contains(String target, String[] source, int start) {
+		for(int i = start; i < source.length; i++) {
 			if(source[i].equals(target)) {
 				return i;
 			}
@@ -535,12 +594,10 @@ public class CluePlayer {
 				cards = Arrays.asList((Clue.allCards.get(other)).keySet().toArray());
 				for(int i = 0; i < cards.size(); i++) {
 					card = (String)cards.get(i);
-					int contains = contains(card, suggestion);
-					if(contains >= 0) {
+					int contains = contains(card, suggestion, 1);
+					if(contains > 0) {
 						found = true;
-						if(contains == 0) { // name
-							// don't know what to do
-						} else if(contains == 1) { // room
+						if(contains == 1) { // room
 							notes.addRoom(card);
 							while(queue != null && queue.remove(card));
 						} else if(contains == 2) { // suspect
