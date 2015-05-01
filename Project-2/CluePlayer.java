@@ -5,6 +5,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Random;
 
 /** 
@@ -18,8 +19,9 @@ public class CluePlayer {
 
 	private boolean inRoom = false;
 	private Square door = null;
-	private Square target = null;
+	private TargetDoor target = null;
 	private boolean onTheHunt = false;
+	private int current_row, current_col;
 	
 	public static final String
 		KITCHEN = "Kitchen",
@@ -43,6 +45,8 @@ public class CluePlayer {
 		LIBRARY,
 		STUDY
 	};
+	
+	private PriorityQueue<TargetDoor> queue = null;
 	
 	private static final int 
 	UP = 0,
@@ -79,6 +83,18 @@ public class CluePlayer {
 			int a = array[index];
 			array[index] = array[i];
 			array[i] = a;
+		}
+	}
+	
+	private void initQueue() {
+		queue = new PriorityQueue<TargetDoor>();
+		for(int row = 2; row < Clue.board.HEIGHT; row++) {
+			for(int col = 0; col < Clue.board.WIDTH; col++) {
+				if(Clue.board.isDoor(row, col)) {
+					queue.add(new TargetDoor(
+						Clue.board.getRoom(row, col),row,col));
+				}
+			}
 		}
 	}
 	
@@ -224,9 +240,6 @@ public class CluePlayer {
 				roll();
 			}
 		}
-		if(!inBounds(row,col)) {
-			System.err.println("ERROR DETECTED:\t"+row + ", " + col);
-		}
 		return new Square(row, col);
 	}
 
@@ -258,6 +271,18 @@ public class CluePlayer {
 		return retVal;
 	}
 	
+	private boolean onTheHunt(DetectiveNotes notes) {
+		if(target == null) {
+			return false;
+		}
+		List<String> rooms = notes.getMyRooms();
+		if(rooms.contains(target.name)) {
+			queue.remove(target.name);
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 *  Find a square on the board for a player to move to by rolling the 
 	 *  die and choosing a good direction. The square that is chosen must
@@ -271,21 +296,170 @@ public class CluePlayer {
 	 *  @return                  The square that this player ends up on
 	 */
 	public Square findSquareSmart(int c_row, int c_col, DetectiveNotes notes) {
-		boolean inRoom = isRoom(c_row, c_col);
+		current_row = c_row;
+		current_col = c_col;
+		if(queue == null) initQueue();
+		
+		
+		
 		List<String> rooms = notes.getMyRooms();
 		// 1. 
-		int stepsLeft = Clue.die;
-		if(!onTheHunt) { // if not already looking for room, find closest
-			
-		}
-		if(inRoom) {
-			// find direction to make first step
+		
+		if(!queue.isEmpty()) {
+			if(!onTheHunt(notes)) { 
+				// if not already looking for room, find closest
+				target = queue.remove();
+			}
+			return pathToDoor();
 		} else {
-			
+			return findSquareRandDir(c_row, c_col);
 		}
-		return findSquareRandDir(c_row, c_col);
+		
+//		if(inRoom) {
+//			// find direction to make first step
+//		} else {
+//			
+//		}
+//		System.out.println("Scarlet is targetting: " + target.name);
+//		System.out.println("Scarlet is targetting: " + queue.remove().name);
+//		return findSquareRandDir(c_row, c_col);
 	}
 
+	private Square pathToDoor() {
+		boolean inRoom = isRoom(current_row, current_col);
+		int[] dirArr = new int[] { UP, RIGHT, DOWN, LEFT };
+		int steps = Clue.die;
+		boolean validRoll = false;
+		boolean validDirection;
+		boolean noValidDirections = false;
+		boolean leavingRoom;
+		final boolean onDoor = Clue.board.isDoor(current_row, 
+				current_col);
+		int col, row;
+//		List<PathSquare> visited = new ArrayList<PathSquare>();
+//		visited.add(new PathSquare(current_row,current_col));
+		List<Square> options = new ArrayList<Square>();
+		if(!isRoom(current_row, current_col)) { // up
+			
+		}
+		
+		inRoom = isRoom(current_row, current_col);
+		while(!validRoll) {
+			// if they're in a room
+			if(inRoom) {
+
+				// they are currently either on a door or not
+				col = current_col;
+				row = current_row;
+				
+				
+				// loop over direction options
+				for(int i = 0; i < dirArr.length && !validRoll; i++) {
+					// pick a direction
+					int direction = dirArr[i];
+					if(direction == UP) { // up
+						validDirection = inBounds(row - Clue.die, col);
+						leavingRoom = !isRoom(row - Clue.die, col);
+					} else if(direction == RIGHT) { // right
+						validDirection = inBounds(row, col + Clue.die);
+						leavingRoom = !isRoom(row, col + Clue.die);
+					} else if(direction == DOWN) { // down
+						validDirection = inBounds(row + Clue.die, col);
+						leavingRoom = !isRoom(row + Clue.die, col);
+					} else { // left
+						validDirection = inBounds(row, col - Clue.die);
+						leavingRoom = !isRoom(row, col - Clue.die);
+					}
+					// if they're on a door and they're leaving,
+					// the next square better not be in a room
+					if(validDirection && onDoor && leavingRoom) {
+						if(direction == UP) {
+							validDirection = !isRoom(row - 1, col);
+						} else if(direction == RIGHT) {
+							validDirection = !isRoom(row, col + 1);
+						} else if(direction == DOWN) {
+							validDirection = !isRoom(row + 1, col);
+						} else {
+							validDirection = !isRoom(row, col - 1);
+						}
+					} 
+					// check every position along the way to make sure this is a valid
+					// direction to travel in given the number of steps 
+					for(int dir = 0; dir < Clue.die && validDirection; dir++) {
+						if(direction == UP) { // up
+							row--;
+						} else if(direction == RIGHT) { // right
+							col++;
+						} else if(direction == DOWN) { // down
+							row++;
+						} else { // left
+							col--;
+						}
+						if(inBounds(row, col)) {
+							if(Clue.board.isDoor(row, col)) {
+								// ensure they are leaving the same door
+								if(leavingRoom) {
+									if(door.getRow() != row || door.getColumn() != col) {
+										validDirection = false;
+									}
+								}
+							} else if(isRoom(row, col)) {
+								validDirection = false;
+							}
+						} else {
+							validDirection = false;
+						}
+					}
+					if (inBounds(row, col) && validDirection) {
+						validRoll = true;
+					}
+				}
+			} else { // they are not in a room
+				// for each direction that they could move
+				// test which one works
+				for(int i = 0; i < dirArr.length && !validRoll; i++) {
+					int direction = dirArr[i];
+					col = current_col;
+					row = current_row;
+
+					validDirection = true;
+					for(int die = 0; die < Clue.die && 
+							validDirection && !validRoll; die++) {
+						if(direction == UP) { // up
+							row--;
+						} else if(direction == RIGHT) { // right
+							col++;
+						} else if(direction == DOWN) { // down
+							row++;
+						} else { // left
+							col--;
+						}
+						if(inBounds(row, col)) {
+							if(Clue.board.isDoor(row, col)) {
+								door = new Square(row,col);
+								validRoll = true;
+								//								break;
+							} else if(isRoom(row, col)) {
+								validDirection = false;
+							}
+						} else {
+							validDirection = false;
+						}
+					} // check direction
+					if (inBounds(row, col) && validDirection) {
+						validRoll = true;
+						//						break;
+					}
+				}
+			}
+			if(!validRoll) {
+				roll();
+			}
+		}
+		
+		return null;
+	}
+	
 	/**
 	 *  Move to a legal square on the board. If the move lands on a door,
 	 *  make a suggestion by guessing a random suspect and random weapon.
@@ -437,6 +611,7 @@ public class CluePlayer {
 							// don't know what to do
 						} else if(contains == 1) { // room
 							notes.addRoom(card);
+							while(queue != null && queue.remove(card));
 						} else if(contains == 2) { // suspect
 							notes.addSuspect(card);
 						} else if(contains == 3) { // weapon
@@ -444,12 +619,8 @@ public class CluePlayer {
 						}
 					}
 				}
-				
 			}
 		}
-		
-		 
-		
 		// Make an accusation
 		if (!found) {
 			// Check this player's cards to see if this player has them
@@ -492,12 +663,60 @@ public class CluePlayer {
 		else if (type.equals("room"))
 			notes.addRoom(card);
 	}
-	
-	private class Room {
-		public final String name;
-		public Room(String name) {
-			this.name = name;
+
+	private class PathSquare {
+		public final int row, col;
+		public PathSquare(int row, int col) {
+			this.row = row;
+			this.col = col;
 		}
 		
+		public boolean equals(Object o) {
+			if(o == this) {
+				return true;
+			}
+			if(!(o instanceof PathSquare)) {
+				return false;
+			}
+			PathSquare p = (PathSquare)o;
+			return this.row == p.row &&
+					this.col == p.col;
+		}
+	}
+	
+	private class TargetDoor implements Comparable<TargetDoor> {
+		public final String name;
+		public final int row, col;
+		public TargetDoor(String name, int row, int col) {
+			this.name = name;
+			this.row = row;
+			this.col = col;
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if(this == o) {
+				return true;
+			}
+			if(o instanceof String) {
+				String cast = (String)o;
+				return name.equals(cast);
+			}
+			TargetDoor cast = (TargetDoor)o;
+			return name.equals(cast.name);
+		}
+
+		@Override
+		public int compareTo(TargetDoor o) {
+			int myDistance = distance(current_row, current_col);
+			int hisDistance = o.distance(current_row, current_col);
+			return myDistance - hisDistance;
+		}
+		
+		public int distance(int row, int col) {
+			int a = this.row - row;
+			int b = this.col - col;
+			return (a*a) + (b*b);
+		}
 	}
 }
