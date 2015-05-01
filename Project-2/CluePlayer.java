@@ -339,13 +339,11 @@ public class CluePlayer {
 //		List<PathSquare> visited = new ArrayList<PathSquare>();
 //		visited.add(new PathSquare(current_row,current_col));
 		List<Square> options = new ArrayList<Square>();
-		if(!isRoom(current_row, current_col)) { // up
-			
-		}
 		
 		inRoom = isRoom(current_row, current_col);
 		while(!validRoll) {
 			// if they're in a room
+			options = new ArrayList<Square>();
 			if(inRoom) {
 
 				// they are currently either on a door or not
@@ -354,7 +352,7 @@ public class CluePlayer {
 				
 				
 				// loop over direction options
-				for(int i = 0; i < dirArr.length && !validRoll; i++) {
+				for(int i = 0; i < dirArr.length; i++) {
 					// pick a direction
 					int direction = dirArr[i];
 					if(direction == UP) { // up
@@ -412,19 +410,20 @@ public class CluePlayer {
 					}
 					if (inBounds(row, col) && validDirection) {
 						validRoll = true;
+						options.add(new Square(row, col));
 					}
 				}
 			} else { // they are not in a room
 				// for each direction that they could move
 				// test which one works
-				for(int i = 0; i < dirArr.length && !validRoll; i++) {
+				for(int i = 0; i < dirArr.length; i++) {
 					int direction = dirArr[i];
 					col = current_col;
 					row = current_row;
 
 					validDirection = true;
 					for(int die = 0; die < Clue.die && 
-							validDirection && !validRoll; die++) {
+							validDirection; die++) {
 						if(direction == UP) { // up
 							row--;
 						} else if(direction == RIGHT) { // right
@@ -448,7 +447,7 @@ public class CluePlayer {
 					} // check direction
 					if (inBounds(row, col) && validDirection) {
 						validRoll = true;
-						//						break;
+						
 					}
 				}
 			}
