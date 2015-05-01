@@ -293,14 +293,14 @@ public class CluePlayer {
 	}
 
 	/**
-	 * roll the dice, mama
+	 * roll the die
 	 */
 	private void roll() {
 		Clue.die = (int)(Math.random()*6) + 1;
 	}
 
 	/**
-	 * private scyther method
+	 * private helper method
 	 * @param row
 	 * @param col
 	 * @return
@@ -404,8 +404,8 @@ public class CluePlayer {
 
 	/**
 	 * a* path
-	 * @param start
-	 * @param goal
+	 * @param start start node
+	 * @param goal goal node
 	 * @return a* path
 	 */
 	private List<PathSquare> astarPath(PathSquare start) {
