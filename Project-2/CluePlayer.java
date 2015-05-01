@@ -27,12 +27,12 @@ public class CluePlayer {
 	
 	public static final String
 		KITCHEN = "Kitchen",
-		BALL_ROOM = "Ball Room",
+		BALLROOM = "Ballroom",
 		CONSERVATORY = "Conservatory",
 		DINING_ROOM = "Dining Room",
 		BILLIARD_ROOM = "Billiard Room",
 		LOUNGE = "Lounge",
-		HALL = "Hall",
+		HALLWAY = "Hallway",
 		LIBRARY = "Library",
 		STUDY = "Study";
 	
@@ -63,12 +63,12 @@ public class CluePlayer {
 	
 	private static final String[] rooms = {
 		KITCHEN,
-		BALL_ROOM,
+		BALLROOM,
 		CONSERVATORY,
 		DINING_ROOM,
 		BILLIARD_ROOM,
 		LOUNGE,
-		HALL,
+		HALLWAY,
 		LIBRARY,
 		STUDY
 	};
@@ -110,6 +110,10 @@ public class CluePlayer {
 		return new Square(row, col);
 	}
 
+	/**
+	 * private helper method
+	 * @param array
+	 */
 	private void shuffleArray(int[] array)
 	{
 		Random r = new Random();
@@ -122,6 +126,9 @@ public class CluePlayer {
 		}
 	}
 	
+	/**
+	 * private helper method
+	 */
 	private void initQueue() {
 		queue = new PriorityQueue<TargetDoor>();
 		for(int row = 2; row < Clue.board.HEIGHT; row++) {
@@ -134,6 +141,12 @@ public class CluePlayer {
 		}
 	}
 	
+	/**
+	 * private helper method
+	 * @param row
+	 * @param col
+	 * @return
+	 */
 	private boolean isRoom(int row, int col) {
 		try {
 			return !Clue.board.getRoom(row, col).trim().equals("");
@@ -218,7 +231,7 @@ public class CluePlayer {
 						if(inBounds(row, col)) {
 							if(Clue.board.isDoor(row, col)) {
 								// ensure they are leaving the same door
-								if(leavingRoom) {
+								if(leavingRoom && door != null) {
 									if(door.getRow() != row || door.getColumn() != col) {
 										validDirection = false;
 									}
@@ -279,15 +292,30 @@ public class CluePlayer {
 		return new Square(row, col);
 	}
 
+	/**
+	 * roll the dice, mama
+	 */
 	private void roll() {
 		Clue.die = (int)(Math.random()*6) + 1;
 	}
 
+	/**
+	 * private scyther method
+	 * @param row
+	 * @param col
+	 * @return
+	 */
 	private boolean inBounds(int row, int col) {
 		return (col >= 0 && col < Clue.board.WIDTH && 
 				row >= 2 && row < Clue.board.HEIGHT);
 	}
 
+	/**
+	 * private helper method
+	 * @param src
+	 * @param target
+	 * @return
+	 */
 	private boolean contains(String[] src, String target) {
 		for(String s : src) {
 			if(s.equals(target)) {
@@ -297,6 +325,12 @@ public class CluePlayer {
 		return false;
 	}
 	
+	/**
+	 * private helper method
+	 * @param source
+	 * @param by
+	 * @return
+	 */
 	private List<String> filter(List<String> source, String[] by) {
 		List<String> retVal = new ArrayList<String>();
 		for(String s : source) {
@@ -307,6 +341,12 @@ public class CluePlayer {
 		return retVal;
 	}
 	
+	/**
+	 * private helper method
+	 * @param source 
+	 * @param by
+	 * @return
+	 */
 	private List<String> filter(String[] source, List<String> by) {
 		List<String> newSource = Arrays.asList(source);
 		String[] newBy = new String[by.size()];
@@ -317,6 +357,11 @@ public class CluePlayer {
 		return filter(newSource, newBy);
 	}
 	
+	/**
+	 * private helper method
+	 * @param notes 
+	 * @return true if this player is in pursuit of a door
+	 */
 	private boolean onTheHunt(DetectiveNotes notes) {
 		if(target == null) {
 			return false;
@@ -355,15 +400,6 @@ public class CluePlayer {
 		} else {
 			return findSquareRandDir(c_row, c_col);
 		}
-		
-//		if(inRoom) {
-//			// find direction to make first step
-//		} else {
-//			
-//		}
-//		System.out.println("Scarlet is targetting: " + target.name);
-//		System.out.println("Scarlet is targetting: " + queue.remove().name);
-//		return findSquareRandDir(c_row, c_col);
 	}
 
 	/**
@@ -379,30 +415,16 @@ public class CluePlayer {
 		TargetDoor goal = start.goal;
 		boolean found = false;
 		if(start.equals(goal)) {
-//			System.out.println("STARTING ON GOAL");
 			found = true;
 		}
 		Node next;
 		UndirectedEdge edge;
 		PathSquare current, t1;
 		pq.add(X);
-		int count = 0;
 		while(!pq.isEmpty() && !found) {
-//			if((++count)%10 == 0) {
-//				System.out.println(count);
-//				if(count > 9) {
-//					System.out.println("WARNING " + pq.size());
-//					System.out.println("Start: " + "("+start.row+", "+start.col+")\t"
-//							+ "Goal: " +"("+goal.row+", "+goal.col+")");
-//				}
-//			}
-//			System.out.println("WARNING " + pq.size());
-//			System.out.println("Start: " + "("+start.row+", "+start.col+")\t"
-//					+ "Goal: " +"("+goal.row+", "+goal.col+")");
 			X = pq.remove();
 			closed.add(X);
 			current = X.payload;
-//			System.out.println("Current: (" + current.row+", "+current.col+")");
 			if(X.payload.equals(goal)) {
 				found = true;
 				break;
@@ -430,8 +452,12 @@ public class CluePlayer {
 		return result;
 	}
 	
+	/**
+	 * private helper method
+	 * @return next square along the path to the target door
+	 */
 	private Square pathToDoor() {
-		if(target == null) System.out.println("ERROR NULL");
+//		if(target == null) System.out.println("ERROR NULL");
 		PathSquare start = new PathSquare(current_row, current_col, target);
 		List<PathSquare> path = astarPath(start);
 		PathSquare p;
@@ -550,11 +576,14 @@ public class CluePlayer {
 
 		return retVal;
 	}
-
-	private int contains(String target, String[] source) {
-		return contains(target, source, 0);
-	}
 	
+	/**
+	 * private helper method
+	 * @param target 
+	 * @param source
+	 * @param start
+	 * @return
+	 */
 	private int contains(String target, String[] source, int start) {
 		for(int i = start; i < source.length; i++) {
 			if(source[i].equals(target)) {
@@ -622,11 +651,15 @@ public class CluePlayer {
 					}
 			}
 			// If still not found, I do believe I have won the game!
-			for (int i=1; i<4; i++)
-				if (!found)
+			for (int i=1; i<4; i++) {
+				if (!found) {
 					accusation.add(suggestion[i]);
-				else 
+					queue = null;
+				}
+				else { 
 					accusation.add("None");
+				}
+			}
 		}
 
 		return accusation;
@@ -652,6 +685,11 @@ public class CluePlayer {
 			notes.addRoom(card);
 	}
 
+	/**
+	 * private helper class
+	 * @author james
+	 *
+	 */
 	private class PathSquare {
 		public final int row, col;
 		public final TargetDoor goal;
@@ -678,11 +716,11 @@ public class CluePlayer {
 					this.col == p.col;
 		}
 		
-		public int edgeCount() {
+		private int edgeCount() {
 			return 4;
 		}
 		
-		public UndirectedEdge get(int i) {
+		private UndirectedEdge get(int i) {
 			PathSquare temp;
 			switch(i) {
 			case UP: // up
@@ -700,7 +738,7 @@ public class CluePlayer {
 			}
 		}
 		
-		public int distance() {
+		private int distance() {
 			int a, b;
 			a = row - goal.row;
 			b = col - goal.col;
@@ -745,6 +783,11 @@ public class CluePlayer {
 		}
 	}
 	
+	/**
+	 * private helper class
+	 * @author james
+	 *
+	 */
 	private class NodeComparator implements Comparator<Node> {
 		@Override
 		public int compare(Node o1, Node o2) {
@@ -753,14 +796,11 @@ public class CluePlayer {
 		
 	}
 	
-	private class PathComparator implements Comparator<PathSquare> {
-		@Override
-		public int compare(PathSquare o1, PathSquare o2) {
-			return o1.distance() - o2.distance();
-		}
-		
-	}
-	
+	/**
+	 * private helper class
+	 * @author james
+	 *
+	 */
 	public class UndirectedEdge {
 		public final double weight = 1;
 		
@@ -791,6 +831,11 @@ public class CluePlayer {
 		}
 	}
 	
+	/**
+	 * private helper class
+	 * @author jhf3617
+	 *
+	 */
 	private class TargetDoor implements Comparable<TargetDoor> {
 		public final String name;
 		public final int row, col;
@@ -820,6 +865,12 @@ public class CluePlayer {
 			return myDistance - hisDistance;
 		}
 		
+		/**
+		 * distance to other square
+		 * @param row row of square
+		 * @param col column of square
+		 * @return distance
+		 */
 		public int distance(int row, int col) {
 			int a = this.row - row;
 			int b = this.col - col;
