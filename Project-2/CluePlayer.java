@@ -4,6 +4,8 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -325,138 +327,68 @@ public class CluePlayer {
 //		return findSquareRandDir(c_row, c_col);
 	}
 
+	/**
+	 * a* path
+	 * @param start
+	 * @param goal
+	 * @return a* path
+	 */
+	private List<PathSquare> astarPath(PathSquare start) {
+		PriorityQueue<Node> pq = new PriorityQueue<Node>(10, new NodeComparator());
+		LinkedList<Node> closed = new LinkedList<Node>();
+		Node X = new Node(start);
+		TargetDoor goal = start.goal;
+		Node next;
+		UndirectedEdge edge;
+		PathSquare current, t1;
+		pq.add(X);
+		boolean found = false;
+		while(!pq.isEmpty() && !found) {
+			X = pq.remove();
+			current = X.payload;
+			if(X.payload.equals(goal)) {
+				found = true;
+				break;
+			} else {
+				for(int i = 0; i < current.edgeCount(); i++) {
+					edge = current.get(i);
+					t1 = edge.other(current);
+					next = new Node(X, t1);
+					if(!closed.contains(next) && !pq.contains(next) && inBounds(next.payload.row, next.payload.col)
+							&& (!isRoom(next.payload.row, next.payload.col) ||
+									Clue.board.isDoor(next.payload.row, next.payload.col))) {
+						next.g = edge.weight + X.g;
+						next.h = t1.distance();
+						pq.add(next);
+					}
+				}
+			}
+		}
+		ArrayList<PathSquare> result = new ArrayList<PathSquare>();
+		while(!X.isRoot()) {
+			result.add(0,X.payload);
+			X = X.parent;
+		}
+		result.add(0, X.payload);
+		return result;
+	}
+	
 	private Square pathToDoor() {
 		boolean inRoom = isRoom(current_row, current_col);
 		int[] dirArr = new int[] { UP, RIGHT, DOWN, LEFT };
-		int steps = Clue.die;
-		boolean validRoll = false;
-		boolean validDirection;
-		boolean noValidDirections = false;
-		boolean leavingRoom;
-		final boolean onDoor = Clue.board.isDoor(current_row, 
-				current_col);
-		int col, row;
-//		List<PathSquare> visited = new ArrayList<PathSquare>();
-//		visited.add(new PathSquare(current_row,current_col));
-		List<Square> options = new ArrayList<Square>();
-		
-		inRoom = isRoom(current_row, current_col);
-		while(!validRoll) {
-			// if they're in a room
-			options = new ArrayList<Square>();
-			if(inRoom) {
-
-				// they are currently either on a door or not
-				col = current_col;
-				row = current_row;
-				
-				
-				// loop over direction options
-				for(int i = 0; i < dirArr.length; i++) {
-					// pick a direction
-					int direction = dirArr[i];
-					if(direction == UP) { // up
-						validDirection = inBounds(row - Clue.die, col);
-						leavingRoom = !isRoom(row - Clue.die, col);
-					} else if(direction == RIGHT) { // right
-						validDirection = inBounds(row, col + Clue.die);
-						leavingRoom = !isRoom(row, col + Clue.die);
-					} else if(direction == DOWN) { // down
-						validDirection = inBounds(row + Clue.die, col);
-						leavingRoom = !isRoom(row + Clue.die, col);
-					} else { // left
-						validDirection = inBounds(row, col - Clue.die);
-						leavingRoom = !isRoom(row, col - Clue.die);
-					}
-					// if they're on a door and they're leaving,
-					// the next square better not be in a room
-					if(validDirection && onDoor && leavingRoom) {
-						if(direction == UP) {
-							validDirection = !isRoom(row - 1, col);
-						} else if(direction == RIGHT) {
-							validDirection = !isRoom(row, col + 1);
-						} else if(direction == DOWN) {
-							validDirection = !isRoom(row + 1, col);
-						} else {
-							validDirection = !isRoom(row, col - 1);
-						}
-					} 
-					// check every position along the way to make sure this is a valid
-					// direction to travel in given the number of steps 
-					for(int dir = 0; dir < Clue.die && validDirection; dir++) {
-						if(direction == UP) { // up
-							row--;
-						} else if(direction == RIGHT) { // right
-							col++;
-						} else if(direction == DOWN) { // down
-							row++;
-						} else { // left
-							col--;
-						}
-						if(inBounds(row, col)) {
-							if(Clue.board.isDoor(row, col)) {
-								// ensure they are leaving the same door
-								if(leavingRoom) {
-									if(door.getRow() != row || door.getColumn() != col) {
-										validDirection = false;
-									}
-								}
-							} else if(isRoom(row, col)) {
-								validDirection = false;
-							}
-						} else {
-							validDirection = false;
-						}
-					}
-					if (inBounds(row, col) && validDirection) {
-						validRoll = true;
-						options.add(new Square(row, col));
-					}
-				}
-			} else { // they are not in a room
-				// for each direction that they could move
-				// test which one works
-				for(int i = 0; i < dirArr.length; i++) {
-					int direction = dirArr[i];
-					col = current_col;
-					row = current_row;
-
-					validDirection = true;
-					for(int die = 0; die < Clue.die && 
-							validDirection; die++) {
-						if(direction == UP) { // up
-							row--;
-						} else if(direction == RIGHT) { // right
-							col++;
-						} else if(direction == DOWN) { // down
-							row++;
-						} else { // left
-							col--;
-						}
-						if(inBounds(row, col)) {
-							if(Clue.board.isDoor(row, col)) {
-								door = new Square(row,col);
-								validRoll = true;
-								//								break;
-							} else if(isRoom(row, col)) {
-								validDirection = false;
-							}
-						} else {
-							validDirection = false;
-						}
-					} // check direction
-					if (inBounds(row, col) && validDirection) {
-						validRoll = true;
-						
-					}
-				}
-			}
-			if(!validRoll) {
-				roll();
-			}
+		PathSquare start = new PathSquare(current_row, current_col, target);
+		List<PathSquare> path = astarPath(start);
+		Square retval;
+		PathSquare p;
+		if(path.size() == 1) {
+			return findSquareRandDir(current_row, current_col);
 		}
-		
-		return null;
+		if(Clue.die >= path.size()) {
+			p = path.get(path.size()-1);
+		} else {
+			p = path.get(Clue.die);
+		}
+		return retval = new Square(p.row, p.col);
 	}
 	
 	/**
@@ -665,14 +597,21 @@ public class CluePlayer {
 
 	private class PathSquare {
 		public final int row, col;
-		public PathSquare(int row, int col) {
+		public final TargetDoor goal;
+		public PathSquare(int row, int col, TargetDoor goal) {
 			this.row = row;
 			this.col = col;
+			this.goal = goal;
 		}
 		
 		public boolean equals(Object o) {
 			if(o == this) {
 				return true;
+			}
+			if(o instanceof TargetDoor) {
+				TargetDoor d = (TargetDoor)o;
+				return this.row == d.row &&
+						this.col == d.col;
 			}
 			if(!(o instanceof PathSquare)) {
 				return false;
@@ -680,6 +619,118 @@ public class CluePlayer {
 			PathSquare p = (PathSquare)o;
 			return this.row == p.row &&
 					this.col == p.col;
+		}
+		
+		public int edgeCount() {
+			return 4;
+		}
+		
+		public UndirectedEdge get(int i) {
+			PathSquare temp;
+			switch(i) {
+			case UP: // up
+				temp = new PathSquare(row - 1,col, this.goal);
+				return new UndirectedEdge(this, temp);
+			case RIGHT:
+				temp = new PathSquare(row, col + 1, this.goal);
+				return new UndirectedEdge(this, temp);
+			case DOWN:
+				temp = new PathSquare(row + 1, col, this.goal);
+				return new UndirectedEdge(this, temp);
+			default: // LEFT
+				temp = new PathSquare(row, col - 1, this.goal);
+				return new UndirectedEdge(this, temp);
+			}
+		}
+		
+		public int distance() {
+			int a, b;
+			a = row - goal.row;
+			b = col - goal.col;
+			return a*a + b*b; 
+		}
+	}
+	
+	/**
+	 * private internal class used for traversals
+	 * @author jimiford
+	 *
+	 */
+	private class Node {
+		public final Node parent;
+		public final PathSquare payload;
+		private double g;
+		private double h;
+		
+		private Node(PathSquare payload) {
+			parent = null;
+			this.payload = payload;
+		}
+		
+		private Node(Node parent, PathSquare payload) {
+			this.parent = parent;
+			this.payload = payload;
+		}
+		
+		public boolean equals(Object o) {
+			if(o == this) return true;
+			if(!(o instanceof Node)) return false;
+			Node casted = (Node)o;
+			return this.payload.equals(casted.payload);
+		}
+		
+		private boolean isRoot() {
+			return parent == null;
+		}
+		
+		public double f() {
+			return g + h;
+		}
+	}
+	
+	private class NodeComparator implements Comparator<Node> {
+		@Override
+		public int compare(Node o1, Node o2) {
+			return o1.payload.distance() - o2.payload.distance();
+		}
+		
+	}
+	
+	private class PathComparator implements Comparator<PathSquare> {
+		@Override
+		public int compare(PathSquare o1, PathSquare o2) {
+			return o1.distance() - o2.distance();
+		}
+		
+	}
+	
+	public class UndirectedEdge {
+		public final double weight = 1;
+		
+		// private data members
+		private PathSquare a, b;
+		
+		/**
+		 * Construct an undirected edge
+		 * @param id a unique identifier to distinguish between other edges
+		 * @param a one vertex in the graph
+		 * @param b another vertex in the graph not equal to <I>a</I>
+		 */
+		public UndirectedEdge(PathSquare a, PathSquare b) {
+			this.a = b;
+			this.b = a;
+		}
+		
+		/**
+		 * Get the <I>other</I> vertex given a certain vertex connected to
+		 * this edge
+		 * 
+		 * @param current the current vertex
+		 * @return the other vertex connected to this edge
+		 */
+		public PathSquare other(PathSquare current) {
+			if(current == null) return null;
+			return current == a ? b : a;
 		}
 	}
 	
