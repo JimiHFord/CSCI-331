@@ -405,7 +405,6 @@ public class CluePlayer {
 	/**
 	 * a* path
 	 * @param start start node
-	 * @param goal goal node
 	 * @return a* path
 	 */
 	private List<PathSquare> astarPath(PathSquare start) {
@@ -793,7 +792,6 @@ public class CluePlayer {
 		public int compare(Node o1, Node o2) {
 			return o1.payload.distance() - o2.payload.distance();
 		}
-		
 	}
 	
 	/**
